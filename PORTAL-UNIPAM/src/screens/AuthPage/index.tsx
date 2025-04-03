@@ -2,12 +2,19 @@ import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 
+import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
+import { propStack } from "../../route/Stack/Models";
 
 export default function AuthPage() {
+  const navigation = useNavigation<propStack>();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  function handleNotes () {
+    navigation.navigate("Notes");
+  }
 
   return (
     <View style={styles.container}>
@@ -48,6 +55,10 @@ export default function AuthPage() {
       <TouchableOpacity style={styles.button}>
         <Ionicons name="log-in" size={16} color="#fff" />
         <Text style={styles.buttonText}>ENTRAR</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleNotes}>
+        <Ionicons name="log-in" size={16} color="#fff" />
+        <Text style={styles.buttonText}>NOTES</Text>
       </TouchableOpacity>
     </View>
   );
