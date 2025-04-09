@@ -2,18 +2,14 @@ import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { createStackNavigator } from '@react-navigation/stack';
 import styles from "./styles";
 import { propStack } from "../../route/Stack/Models";
 
-const Stack = createStackNavigator();
 export default function AuthPage() {
   const navigation = useNavigation<propStack>();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const navigation = useNavigation<propStack>();
-
 
   function handleHome() {
     navigation.navigate("Home");

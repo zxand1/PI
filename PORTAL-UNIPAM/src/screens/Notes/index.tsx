@@ -5,7 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { propStack } from "../../route/Stack/Models";
 import styles from "./styles";

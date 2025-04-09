@@ -3,16 +3,11 @@ import { View, ScrollView, Text } from 'react-native';
 import { List, Avatar } from 'react-native-paper';
 import styles from './styles';
 import { useNavigation } from "@react-navigation/native";
-import { createStackNavigator } from '@react-navigation/stack';
 
-// Tipagem da navegação (ajuste conforme seu projeto)
-type RootStackParamList = {
-    Frequencia: undefined;
-};
 
 type propStack = ReturnType<typeof useNavigation<() => void>>;
 
-// Tipagem da disciplina
+
 interface Disciplina {
     nome: string;
     totalAulas: number;
@@ -20,8 +15,6 @@ interface Disciplina {
     faltasPermitidas: number;
     faltas: number;
 }
-
-const Stack = createStackNavigator<RootStackParamList>();
 
 const Frequency = () => {
     const disciplinas: Disciplina[] = [

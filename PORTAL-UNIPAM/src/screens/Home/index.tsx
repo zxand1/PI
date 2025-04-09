@@ -1,13 +1,11 @@
 import React from 'react';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
-import { Calendar } from 'react-native-calendars'; // Importando o componente Calendar
-import { Ionicons } from '@expo/vector-icons';
-import styles from './styles'; // Importando os estilos do arquivo separado
+import { Calendar } from 'react-native-calendars';
+import styles from './styles';
 
 const Home = () => {
-  // Obtendo a data atual e formatando no formato YYYY-MM-DD
   const currentDate = new Date();
-  const formattedDate = currentDate.toISOString().split('T')[0];  // Ex: "2025-04-02"
+  const formattedDate = currentDate.toISOString().split('T')[0];
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
