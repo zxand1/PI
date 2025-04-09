@@ -4,13 +4,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: "#073b59",
-  },
   content: {
     flex: 1,
   },

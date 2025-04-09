@@ -9,6 +9,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { propStack } from "../../route/Stack/Models";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
+import Header from "../../components/Header";
 
 export default function Notes() {
   const navigation = useNavigation<propStack>();
@@ -16,10 +17,7 @@ export default function Notes() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar translucent={true} />
-      <View style={styles.header}>
-        <Logo width={40} height={40} />
-        <Menu width={40} height={40} color={"white"} />
-      </View>
+     <Header/>
       <ScrollView
         style={styles.content}
         overScrollMode="never"
