@@ -5,8 +5,10 @@ import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 import styles from "./styles";
 import { propStack } from "../../route/Stack/Models";
+
 const Stack = createStackNavigator();
 export default function AuthPage() {
+  const navigation = useNavigation<propStack>();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -18,6 +20,10 @@ export default function AuthPage() {
   }
   function handleFrequency() {
     navigation.navigate("Frequency");
+  }
+
+  function handleNotes () {
+    navigation.navigate("Notes");
   }
 
   return (
@@ -66,6 +72,10 @@ export default function AuthPage() {
         <Ionicons name="log-in" size={16} color="#fff" />
         <Text style={styles.buttonText}>frenquency</Text>
 
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleNotes}>
+        <Ionicons name="log-in" size={16} color="#fff" />
+        <Text style={styles.buttonText}>NOTES</Text>
       </TouchableOpacity>
     </View>
   );
