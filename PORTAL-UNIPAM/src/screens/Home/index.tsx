@@ -3,7 +3,16 @@ import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import styles from './styles';
 
-const Home = () => {
+interface Calendar {
+  dateString: string;
+  day: number;
+  month: number;
+  year: number;
+  timestamp: number;
+}
+
+
+export default function Home() {
   const currentDate = new Date();
   const formattedDate = currentDate.toISOString().split('T')[0];
 
@@ -61,7 +70,7 @@ const Home = () => {
             },
           }}
           monthFormat={'yyyy - MM'}
-          onDayPress={(day) => {
+          onDayPress={(day: Calendar) => {
             console.log('Data selecionada:', day.dateString);
           }}
           theme={{
@@ -83,7 +92,6 @@ const Home = () => {
         />
       </View>
 
-      {/* Horários */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Horários</Text>
         <View style={styles.timeSlot}>
@@ -100,7 +108,6 @@ const Home = () => {
         </View>
       </View>
 
-      {/* Atividades */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Atividades</Text>
         <Text style={styles.activity}>Atividade Avaliativa - 07/04/2025 - Pendende</Text>
@@ -109,4 +116,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+

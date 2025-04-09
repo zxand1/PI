@@ -120,7 +120,6 @@ const Frequency = () => {
                     );
                 })}
 
-                {/* Legenda de cores */}
                 <View style={styles.legendaContainer}>
                     <View style={styles.legendaItem}>
                         <View style={[styles.legendaBola, { backgroundColor: 'green' }]} />
