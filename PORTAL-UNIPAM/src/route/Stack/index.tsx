@@ -1,20 +1,16 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../../screens/Home";
 import AuthPage from "../../screens/AuthPage";
-import { propsNavigationStack } from "./Models";
-import Frequency from "../../screens/Frequency";
-import Notes from "../../screens/Notes";
+import DrawerRoutes from "../Drawer";
+import { propsNavigationStack } from "../Models";
 
-const { Navigator, Screen } = createNativeStackNavigator<propsNavigationStack>();
+const Stack = createNativeStackNavigator<propsNavigationStack>();
 
-export default function() {
-  return(
-    <Navigator initialRouteName="AuthPage" screenOptions={{headerShown: false}}>
-      <Screen name="AuthPage" component={AuthPage}/>
-      <Screen name="Home" component={Home}/>
-      <Screen name="Frequency" component={Frequency}/>
-      <Screen name="Notes" component={Notes}/>
-    </Navigator>
-  )
+export default function StackRoutes() {
+  return (
+    <Stack.Navigator initialRouteName="AuthPage" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="AuthPage" component={AuthPage} />
+      <Stack.Screen name="Drawer" component={DrawerRoutes} />
+    </Stack.Navigator>
+  );
 }

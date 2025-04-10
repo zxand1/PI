@@ -1,15 +1,13 @@
-import Logo from "@/assets/logoWhite.svg";
-import Menu from "@/assets/menu.svg";
 import ArrowBottom from "@/assets/arrowBottom.svg";
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { propStack } from "../../route/Stack/Models";
-import styles from "./styles";
-import { Ionicons } from "@expo/vector-icons";
 import Header from "../../components/Header";
+import { propStack } from "../../route/Models";
+import styles from "./styles";
 
 export default function Notes() {
   const navigation = useNavigation<propStack>();
@@ -17,7 +15,7 @@ export default function Notes() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar translucent={true} />
-     <Header/>
+      <Header/>
       <ScrollView
         style={styles.content}
         overScrollMode="never"

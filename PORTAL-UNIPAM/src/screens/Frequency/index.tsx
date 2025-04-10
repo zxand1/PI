@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, SafeAreaView } from 'react-native';
 import { List, Avatar } from 'react-native-paper';
+import Header from '../../components/Header';
 import styles from './styles';
 import { useNavigation } from "@react-navigation/native";
 
@@ -81,72 +82,75 @@ const Frequency = () => {
         };
 
         return (
-            <ScrollView style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.greeting}>Olá, MATHEUS HENRIQUE DE DEUS</Text>
-                    <Text style={styles.registro}>REGISTRO ACADÊMICO: 22007228</Text>
-                    <Text style={styles.sistema}>SISTEMAS DE INFORMAÇÃO</Text>
-                </View>
+            <SafeAreaView style={styles.container}>
+                <Header />
+                <ScrollView style={styles.container}>
+                    <View style={styles.header}>
+                        <Text style={styles.greeting}>Olá, MATHEUS HENRIQUE DE DEUS</Text>
+                        <Text style={styles.registro}>REGISTRO ACADÊMICO: 22007228</Text>
+                        <Text style={styles.sistema}>SISTEMAS DE INFORMAÇÃO</Text>
+                    </View>
 
-                {disciplinas.map((disciplina, idx) => {
-                    const percentual = calcularPorcentagem(disciplina.faltas, disciplina.totalAulas);
+                    {disciplinas.map((disciplina, idx) => {
+                        const percentual = calcularPorcentagem(disciplina.faltas, disciplina.totalAulas);
 
-                    return (
-                        <View key={idx} style={styles.accordionContainer}>
-                            <List.Accordion
-                                title={disciplina.nome}
-                                expanded={expanded === disciplina.nome}
-                                onPress={() => handlePress(disciplina.nome)}
-                                left={(props) => (
-                                    <Avatar.Icon
-                                        {...props}
-                                        icon="check-circle"
-                                        color={corPorcentagem(percentual)}
-                                        style={{ backgroundColor: 'transparent' }}
-                                    />
-                                )}
-                            >
-                                <View style={styles.details}>
-                                    <Text>Total de aulas: {disciplina.totalAulas}</Text>
-                                    <Text>Aulas dadas: {disciplina.aulasDadas}</Text>
-                                    <Text>Faltas permitidas: {disciplina.faltasPermitidas}</Text>
-                                    <Text>Faltas: {disciplina.faltas}</Text>
-                                    <Text style={{ color: corPorcentagem(percentual), fontWeight: 'bold' }}>
-                                        Faltas: {percentual}%
-                                    </Text>
-                                </View>
-                            </List.Accordion>
+                        return (
+                            <View key={idx} style={styles.accordionContainer}>
+                                <List.Accordion
+                                    title={disciplina.nome}
+                                    expanded={expanded === disciplina.nome}
+                                    onPress={() => handlePress(disciplina.nome)}
+                                    left={(props) => (
+                                        <Avatar.Icon
+                                            {...props}
+                                            icon="check-circle"
+                                            color={corPorcentagem(percentual)}
+                                            style={{ backgroundColor: 'transparent' }}
+                                        />
+                                    )}
+                                >
+                                    <View style={styles.details}>
+                                        <Text>Total de aulas: {disciplina.totalAulas}</Text>
+                                        <Text>Aulas dadas: {disciplina.aulasDadas}</Text>
+                                        <Text>Faltas permitidas: {disciplina.faltasPermitidas}</Text>
+                                        <Text>Faltas: {disciplina.faltas}</Text>
+                                        <Text style={{ color: corPorcentagem(percentual), fontWeight: 'bold' }}>
+                                            Faltas: {percentual}%
+                                        </Text>
+                                    </View>
+                                </List.Accordion>
+                            </View>
+                        );
+                    })}
+
+                    <View style={styles.legendaContainer}>
+                        <View style={styles.legendaItem}>
+                            <View style={[styles.legendaBola, { backgroundColor: 'green' }]} />
+                            <Text style={styles.legendaTexto}>Número de faltas menor que 15%</Text>
                         </View>
-                    );
-                })}
-
-                <View style={styles.legendaContainer}>
-                    <View style={styles.legendaItem}>
-                        <View style={[styles.legendaBola, { backgroundColor: 'green' }]} />
-                        <Text style={styles.legendaTexto}>Número de faltas menor que 15%</Text>
+                        <View style={styles.legendaItem}>
+                            <View style={[styles.legendaBola, { backgroundColor: 'orange' }]} />
+                            <Text style={styles.legendaTexto}>Número de faltas entre 15% e 23%</Text>
+                        </View>
+                        <View style={styles.legendaItem}>
+                            <View style={[styles.legendaBola, { backgroundColor: 'red' }]} />
+                            <Text style={styles.legendaTexto}>Número de faltas entre 24% e 25%</Text>
+                        </View>
+                        <View style={styles.legendaItem}>
+                            <View style={[styles.legendaBola, { backgroundColor: 'darkred' }]} />
+                            <Text style={styles.legendaTexto}>Número de faltas já ultrapassou 25%</Text>
+                        </View>
+                        <View style={styles.legendaItem}>
+                            <View style={[styles.legendaBola, { backgroundColor: '#001F3F' }]} />
+                            <Text style={styles.legendaTexto}>Não foi possível carregar o número de faltas</Text>
+                        </View>
                     </View>
-                    <View style={styles.legendaItem}>
-                        <View style={[styles.legendaBola, { backgroundColor: 'orange' }]} />
-                        <Text style={styles.legendaTexto}>Número de faltas entre 15% e 23%</Text>
-                    </View>
-                    <View style={styles.legendaItem}>
-                        <View style={[styles.legendaBola, { backgroundColor: 'red' }]} />
-                        <Text style={styles.legendaTexto}>Número de faltas entre 24% e 25%</Text>
-                    </View>
-                    <View style={styles.legendaItem}>
-                        <View style={[styles.legendaBola, { backgroundColor: 'darkred' }]} />
-                        <Text style={styles.legendaTexto}>Número de faltas já ultrapassou 25%</Text>
-                    </View>
-                    <View style={styles.legendaItem}>
-                        <View style={[styles.legendaBola, { backgroundColor: '#001F3F' }]} />
-                        <Text style={styles.legendaTexto}>Não foi possível carregar o número de faltas</Text>
-                    </View>
-                </View>
-            </ScrollView>
-        );
+                </ScrollView>
+                </SafeAreaView>
+                );
     };
 
-    return <FrequenciaScreen />;
+                return <FrequenciaScreen />;
 };
 
-export default Frequency;
+                export default Frequency;
