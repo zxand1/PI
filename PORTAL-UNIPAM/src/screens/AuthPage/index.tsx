@@ -12,13 +12,13 @@ export default function AuthPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   function handleHome() {
-    navigation.navigate("Home");
+    navigation.navigate("Drawer");
   }
   function handleFrequency() {
     navigation.navigate("Frequency");
   }
 
-  function handleNotes () {
+  function handleNotes() {
     navigation.navigate("Notes");
   }
 
