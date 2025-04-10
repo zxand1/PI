@@ -22,6 +22,9 @@ export default function AuthPage() {
     navigation.navigate("Notes");
   }
 
+  function handlePlanClassroom () {
+    navigation.navigate("PlanClassroom");
+  }
   return (
     <View style={styles.container}>
       <Image source={{ uri: "https://portal.unipam.edu.br/assets/images/logo.png" }} style={styles.logo} />
@@ -72,6 +75,11 @@ export default function AuthPage() {
       <TouchableOpacity style={styles.button} onPress={handleNotes}>
         <Ionicons name="log-in" size={16} color="#fff" />
         <Text style={styles.buttonText}>NOTES</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={handlePlanClassroom}>
+        <Ionicons name="log-in" size={16} color="#fff" />
+        <Text style={styles.buttonText}>PlanClassroom</Text>
       </TouchableOpacity>
     </View>
   );

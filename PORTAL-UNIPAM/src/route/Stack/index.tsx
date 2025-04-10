@@ -5,6 +5,7 @@ import AuthPage from "../../screens/AuthPage";
 import { propsNavigationStack } from "./Models";
 import Frequency from "../../screens/Frequency";
 import Notes from "../../screens/Notes";
+import PlanClassroom from "../../screens/PlanClassroom";
 
 const { Navigator, Screen } = createNativeStackNavigator<propsNavigationStack>();
 
@@ -15,6 +16,7 @@ export default function() {
       <Screen name="Home" component={Home}/>
       <Screen name="Frequency" component={Frequency}/>
       <Screen name="Notes" component={Notes}/>
+      <Screen name="PlanClassroom" component={PlanClassroom}/>
     </Navigator>
   )
 }
