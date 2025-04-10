@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
-import { propStack } from "../../route/Stack/Models";
+import { propStack } from "../../route/Models";
 
 export default function AuthPage() {
   const navigation = useNavigation<propStack>();

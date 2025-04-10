@@ -3,6 +3,7 @@ import { SafeAreaView, ScrollView, View, Text, TouchableOpacity } from 'react-na
 import { Calendar } from 'react-native-calendars';
 import styles from './styles';
 import Header from '../../components/Header';
+
 interface Calendar {
   dateString: string;
   day: number;
@@ -10,7 +11,6 @@ interface Calendar {
   year: number;
   timestamp: number;
 }
-
 
 export default function Home() {
   const currentDate = new Date();

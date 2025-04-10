@@ -3,15 +3,11 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: "2%",
     backgroundColor: '#fff',
-
   },
-
   container2: {
     padding: "2%",
     backgroundColor: '#fff',
-
   },
 
   header: {
