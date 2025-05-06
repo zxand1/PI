@@ -6,6 +6,7 @@ import { propsNavigationStack } from "../Models";
 import Frequency from "../../screens/Frequency";
 import Notes from "../../screens/Notes";
 import Home from "../../screens/Home";
+import Finance from "../../screens/Finance";
 
 const Stack = createNativeStackNavigator<propsNavigationStack>();
 
@@ -17,6 +18,7 @@ export default function StackRoutes() {
       <Stack.Screen name="Notes" component={Notes} />
       <Stack.Screen name="Drawer" component={DrawerRoutes} />
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Finance" component={Finance} />
     </Stack.Navigator>
   );
 }
