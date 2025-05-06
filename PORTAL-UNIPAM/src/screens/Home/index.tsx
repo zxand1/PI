@@ -1,8 +1,10 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calendar } from 'react-native-calendars';
 import styles from './styles';
 import Header from '../../components/Header';
+import { StatusBar } from 'expo-status-bar';
 
 interface Calendar {
   dateString: string;
@@ -18,6 +20,7 @@ export default function Home() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar translucent/>
       <Header />
       <ScrollView contentContainerStyle={styles.container2}>
         <View style={styles.header}>

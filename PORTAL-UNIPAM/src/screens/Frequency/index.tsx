@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Text, SafeAreaView } from 'react-native';
-import { List, Avatar } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  LayoutAnimation,
+  Platform,
+  UIManager,
+  StatusBar as RNStatusBar,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/Header';
 import styles from './styles';
+import ArrowTop from '@/assets/arrowTop.svg';
+import ArrowBottom from '@/assets/arrowBottom.svg';
 
 interface Subject {
   name: string;
@@ -11,6 +21,10 @@ interface Subject {
   taughtClasses: number;
   allowedAbsences: number;
   absences: number;
+}
+
+if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
 const subjects: Subject[] = [
@@ -62,62 +76,88 @@ function calculateAbsencePercentage(absences: number, total: number): number {
   return parseFloat(((absences / total) * 100).toFixed(2));
 }
 
-function getAbsenceColor(percentage: number): string {
-  if (percentage < 15) return 'green';
-  if (percentage < 24) return 'orange';
-  if (percentage <= 25) return 'red';
-  return 'darkred';
+function getAbsenceColorStyleKey(percentage: number): keyof typeof styles {
+  if (percentage < 15) return 'cardsNotesApproved';
+  if (percentage < 24) return 'cardsNotesDefault';
+  return 'cardsNotesReproved';
 }
 
 export default function FrequencyScreen() {
-  const [expandedSubject, setExpandedSubject] = useState<string>('');
+  const [expanded, setExpanded] = useState<string | null>(null);
 
-  function handleAccordionToggle(name: string) {
-    setExpandedSubject(expandedSubject === name ? '' : name);
+  function toggleCard(name: string) {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setExpanded(expanded === name ? null : name);
   }
 
   return (
-    <SafeAreaView style={styles.content}>
+    <SafeAreaView style={styles.container}>
+      <RNStatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
       <Header />
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.content} overScrollMode="never">
         <View style={styles.header}>
           <Text style={styles.greeting}>Olá, MATHEUS HENRIQUE DE DEUS</Text>
           <Text style={styles.registro}>REGISTRO ACADÊMICO: 22007228</Text>
           <Text style={styles.sistema}>SISTEMAS DE INFORMAÇÃO</Text>
         </View>
 
-        {subjects.map((subject, idx) => {
-          const percentage = calculateAbsencePercentage(subject.absences, subject.totalClasses);
-          const color = getAbsenceColor(percentage);
+        <View style={styles.cards}>
+          {subjects.map((subject, index) => {
+            const isExpanded = expanded === subject.name;
+            const percentage = calculateAbsencePercentage(subject.absences, subject.totalClasses);
+            const colorKey = getAbsenceColorStyleKey(percentage);
 
-          return (
-            <View key={idx} style={styles.accordionContainer}>
-              <List.Accordion
-                title={subject.name}
-                expanded={expandedSubject === subject.name}
-                onPress={() => handleAccordionToggle(subject.name)}
-                left={(props) => (
-                  <Avatar.Icon
-                    {...props}
-                    icon="check-circle"
-                    color={color}
-                    style={{ backgroundColor: 'transparent' }}
-                  />
-                )}
+            return (
+              <TouchableOpacity
+                key={index}
+                style={[
+                  styles.cardsContainer,
+                  isExpanded && {
+                    height: 'auto',
+                    paddingBottom: 15,
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                  },
+                ]}
+                onPress={() => toggleCard(subject.name)}
+                activeOpacity={0.9}
               >
-                <View style={styles.details}>
-                  <Text>Total de aulas: {subject.totalClasses}</Text>
-                  <Text>Aulas dadas: {subject.taughtClasses}</Text>
-                  <Text>Faltas permitidas: {subject.allowedAbsences}</Text>
-                  <Text>Faltas: {subject.absences}</Text>
-                  <Text style={{ color, fontWeight: 'bold' }}>
-                    Faltas: {percentage}%
-                  </Text>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                  }}
+                >
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.cardsTitle} numberOfLines={2}>
+                      {subject.name}
+                    </Text>
+                  </View>
+                  <Text style={styles[colorKey]}>{percentage}%</Text>
+                  {isExpanded ? (
+                    <ArrowTop width={20} height={20} style={{ marginLeft: 10 }} />
+                  ) : (
+                    <ArrowBottom width={20} height={20} style={{ marginLeft: 10 }} />
+                  )}
                 </View>
-              </List.Accordion>
-            </View>
-          );
-        })}
+
+                {isExpanded && (
+                  <View style={{ marginTop: 10, width: '100%', gap: 8 }}>
+                    <Text>Total de aulas: {subject.totalClasses}</Text>
+                    <Text>Aulas dadas: {subject.taughtClasses}</Text>
+                    <Text>Faltas permitidas: {subject.allowedAbsences}</Text>
+                    <Text>Faltas: {subject.absences}</Text>
+                    <Text style={{ fontWeight: 'bold' }}>
+                      Percentual de faltas: {percentage}%
+                    </Text>
+                  </View>
+                )}
+              </TouchableOpacity>
+            );
+          })}
+        </View>
 
         <View style={styles.legendaContainer}>
           <LegendItem color="green" label="Número de faltas menor que 15%" />

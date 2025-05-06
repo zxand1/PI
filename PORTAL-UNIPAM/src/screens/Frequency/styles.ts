@@ -1,19 +1,21 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   content: {
     flex: 1,
   },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  title: {
+    color: '#000',
+    fontSize: 24,
   },
   header: {
     backgroundColor: '#003366',
-    padding: 10,
     borderRadius: 12,
-    marginBottom: 16,
-    margin: 5,
+    padding: 10,
+    margin: 10,
   },
   greeting: {
     color: '#fff',
@@ -26,21 +28,55 @@ export default StyleSheet.create({
     color: '#fff',
     marginBottom: 8,
   },
-  accordionContainer: {
+  cards: {
+    flex: 1,
+    padding: 20,
+    gap: 15,
+  },
+  cardsContainer: {
+    height: 60,
+    borderColor: '#2c3131',
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    marginVertical: 6,
-    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 10,
+  },
+  cardsTitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    width: 250,
+    color: '#000',
+  },
+  cardsNotesApproved: {
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    backgroundColor: '#6fc872cc',
+    borderRadius: 20,
+    color: 'white',
     overflow: 'hidden',
   },
-  details: {
-    padding: 16,
-    backgroundColor: '#f0f0f0',
+  cardsNotesReproved: {
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    backgroundColor: '#ff5c5ccc',
+    borderRadius: 20,
+    color: 'white',
+    overflow: 'hidden',
+  },
+  cardsNotesDefault: {
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    backgroundColor: '#334c7d',
+    borderRadius: 20,
+    color: 'white',
+    overflow: 'hidden',
   },
   legendaContainer: {
     marginTop: 20,
-    paddingHorizontal: 8,
+    paddingHorizontal: 20,
     paddingBottom: 40,
   },
   legendaItem: {
@@ -60,3 +96,4 @@ export default StyleSheet.create({
   },
 });
 
+export default styles;
