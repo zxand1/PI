@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState, useCallback } from "react";
+import { Image, Text, TextInput, TouchableOpacity, View, Alert } from "react-native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import styles from "./styles";
 import { propStack } from "../../route/Models";
 
@@ -11,15 +11,29 @@ export default function AuthPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  function handleHome() {
-    navigation.navigate("Drawer");
-  }
-  function handleFrequency() {
-    navigation.navigate("Frequency");
-  }
+  useFocusEffect(
+    useCallback(() => {
+      setTimeout(() => {
+      setUsername('');
+      setPassword('');
+      setShowPassword(false);
+    }, 100);
+    }, [])
+  )
 
-  function handleNotes() {
-    navigation.navigate("Notes");
+  function handleLogin() {
+    console.log("Usuário", username, "Senha", password);
+
+    if (!username || !password) {
+      Alert.alert("Campos obrigatórios", "Preencha usuário e senha");
+      return;
+    }
+
+    if (username === "admin" && password === "1234") {
+      navigation.navigate("Drawer");
+    } else {
+      alert("Usuário ou senha inválidos");
+    }
   }
 
   return (
@@ -31,6 +45,7 @@ export default function AuthPage() {
       <Text style={styles.label}>Usuário</Text>
       <View style={styles.inputContainer}>
         <TextInput
+          key={`username-${username}`}
           style={styles.input}
           value={username}
           onChangeText={setUsername}
@@ -42,6 +57,7 @@ export default function AuthPage() {
       <Text style={styles.label}>Senha</Text>
       <View style={styles.inputContainer}>
         <TextInput
+          key={`username-${username}`}
           style={styles.input}
           value={password}
           onChangeText={setPassword}
@@ -58,20 +74,9 @@ export default function AuthPage() {
         <Text style={styles.forgotText}>Esqueceu a Senha ou Usuário Bloqueado?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={handleHome} >
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Ionicons name="log-in" size={16} color="#fff" />
         <Text style={styles.buttonText}>ENTRAR</Text>
-
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button} onPress={handleFrequency} >
-        <Ionicons name="log-in" size={16} color="#fff" />
-        <Text style={styles.buttonText}>frenquency</Text>
-
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleNotes}>
-        <Ionicons name="log-in" size={16} color="#fff" />
-        <Text style={styles.buttonText}>NOTES</Text>
       </TouchableOpacity>
     </View>
   );
