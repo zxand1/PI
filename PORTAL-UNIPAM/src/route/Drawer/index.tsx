@@ -2,6 +2,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Home from "../../screens/Home";
 import Frequency from "../../screens/Frequency";
 import Notes from "../../screens/Notes";
+import AuthPage from "../../screens/AuthPage";
 import Finance from "../../screens/Finance";
 import CustomDrawerContent from "../../components/Drawer";
 
@@ -21,6 +22,7 @@ export default function DrawerRoutes() {
       <Drawer.Screen name="Frequência" component={Frequency} />
       <Drawer.Screen name="Notas" component={Notes} />
       <Drawer.Screen name="Financeiro" component={Finance} />
+      <Drawer.Screen name="Autenticação" component={AuthPage} />
     </Drawer.Navigator>
   );
 }
