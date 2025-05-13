@@ -5,6 +5,7 @@ export type propsNavigationStack = {
   Home: undefined;
   Frequency:undefined;
   Notes: undefined;
+  Materials: undefined;
 }
 
 export type propStack = NativeStackNavigationProp<propsNavigationStack>
