@@ -47,6 +47,11 @@ export default function CustomDrawerContent(props: any) {
         icon={() => <Icon name="cash-multiple" size={20} color="#014a8f" />}
         onPress={() => props.navigation.navigate('Financeiro')}
       />
+      <DrawerItem
+        label="Plano de Aula"
+        icon={() => <Icon name="cash-multiple" size={20} color="#014a8f" />}
+        onPress={() => props.navigation.navigate('Plano de Aula')}
+      />
     </DrawerContentScrollView>
   );
 }
