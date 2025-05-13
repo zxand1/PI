@@ -1,81 +1,103 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#F6F8FA',
   },
-  content: {
-    flex: 1,
+  header: {
+    marginBottom: 16,
+    padding: 10,
   },
-  contentHeader: {
-    width: "100%",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 20,
+  breadcrumb: {
+    fontSize: 14,
+    color: '#666',
   },
   title: {
-    color: "#000",
-    fontSize: 24,
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1A1A1A',
+    marginTop: 4,
   },
-  contentWarningTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#eea30c",
-    margin: 20,
-    padding: 20,
-    borderColor: "#ffb628",
-    borderWidth: 1,
-    borderRadius: 10,
-    alignItems: "center"
+  card: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+    padding: 16,
+    elevation: 2,
+    margin: 10,
   },
-  contentWarning: {
-    fontWeight: "regular",
-    fontSize: 15,
+  subTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 4,
+    color: '#333',
   },
-  cards: {
-    flex: 1,
-    padding: 20,
-    gap: 15,
-  },
-  cardsContainer: {
-    height: 60,
-    borderColor: "#2c3131",
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    gap: 10,
-  },
-  cardsTitle: {
+  date: {
     fontSize: 14,
-    fontWeight: "bold",
-    width: 250,
+    color: '#555',
+    marginBottom: 8,
   },
-  cardsNotesApproved: {
-    paddingHorizontal: 7,
-    paddingVertical: 2,
-    backgroundColor: "#6fc872cc",
+  statusBox: {
+    backgroundColor: '#DFF5E1',
+    paddingVertical: 4,
+    paddingHorizontal: 12,
     borderRadius: 20,
-    color: "white"
+    alignSelf: 'flex-start',
+    marginBottom: 16,
   },
-  cardsNotesReproved: {
-    paddingHorizontal: 7,
-    paddingVertical: 2,
-    backgroundColor: "#ff5c5ccc",
-    borderRadius: 20,
-    color: "white"
+  statusText: {
+    color: '#2F7A3E',
+    fontWeight: '600',
+    fontSize: 13,
   },
-  cardsNotesDefault: {
-    paddingHorizontal: 7,
-    paddingVertical: 2,
-    backgroundColor: "#334c7d",
+  sectionTitle: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginTop: 12,
+    marginBottom: 6,
+    color: '#222',
+  },
+  paragraph: {
+    fontSize: 14,
+    color: '#444',
+    marginBottom: 12,
+    lineHeight: 20,
+  },
+  listContainer: {
+    paddingLeft: 10,
+    marginBottom: 12,
+  },
+  listItem: {
+    fontSize: 14,
+    color: '#333',
+    marginBottom: 6,
+    lineHeight: 20,
+  },
+  tagsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginTop: 8,
+  },
+  tag: {
+    backgroundColor: '#2B4B73',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
     borderRadius: 20,
-    color: "white"
-  }
+    marginRight: 8,
+    marginBottom: 8,
+  },
+  tagText: {
+    color: '#FFFFFF',
+    fontSize: 13,
+  },
+  toggleText: {
+    color: '#1A73E8',
+    fontWeight: 'bold',
+    marginTop: 8,
+    marginBottom: 4,
+    alignSelf: 'flex-end',
+  },  
 });
 
 export default styles;

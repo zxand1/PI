@@ -1,163 +1,101 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  LayoutAnimation,
-  Platform,
-  UIManager,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
-import Header from "../../components/Header";
-import styles from "./styles";
-import ArrowBottom from "@/assets/arrowBottom.svg";
-import ArrowTop from "@/assets/arrowTop.svg";
+import React from 'react';
+import { ScrollView, Text, View, LayoutAnimation, Platform, UIManager } from 'react-native';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { RootStackParamList } from '../../types/navigation';
+import Header from '../../components/Header';
+import styles from './styles';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-interface Evaluation {
-  title: string;
-  score: number;
-  maxScore: number;
-  date: string;
-}
-
-interface SubjectNote {
-  name: string;
-  evaluations: Evaluation[];
-}
-
-if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
+// Ativar animações no Android
+if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const subjects: SubjectNote[] = [
-  {
-    name: "Desenvolvimento de Sistemas de Informação Avançados II",
-    evaluations: [
-      { title: "Prova 1", score: 14, maxScore: 14, date: "28/03/2025" },
-      { title: "Prática 1", score: 0, maxScore: 6, date: "28/03/2025" },
+type ClassPlanRouteProp = RouteProp<RootStackParamList, 'ClassPlan'>;
+
+const ClassPlan = () => {
+  const route = useRoute<ClassPlanRouteProp>();
+
+  const fallback = {
+    tituloDisciplina: "Sistemas de Informação Avançados II",
+    dataAula: "13/05/2025",
+    titulo: "Introdução ao Desenvolvimento Mobile",
+    objetivo: "Apresentar os objetivos da disciplina e ferramentas usadas.",
+    conteudos: [
+      "Apresentação da ementa",
+      "Configuração de ambiente",
+      "Instalação do React Native"
     ],
-  },
-  {
-    name: "Economia",
-    evaluations: [{ title: "Prova Única", score: 6, maxScore: 10, date: "20/03/2025" }],
-  },
-  {
-    name: "Estágio Supervisionado I",
-    evaluations: [],
-  },
-  {
-    name: "Projeto Integrador VII",
-    evaluations: [{ title: "Trabalho", score: 0, maxScore: 20, date: "15/03/2025" }],
-  },
-  {
-    name: "Tópicos Especiais II",
-    evaluations: [{ title: "Prova", score: 7, maxScore: 10, date: "10/03/2025" }],
-  },
-  {
-    name: "Tópicos Integradores II",
-    evaluations: [
-      { title: "Entrega 1", score: 15, maxScore: 15, date: "05/03/2025" },
-      { title: "Entrega 2", score: 10, maxScore: 13, date: "15/04/2025" },
-    ],
-  },
-];
+    metodologia: [
+      "Aula expositiva",
+      "Resolução prática de exercícios"
+    ]
+  };
 
-function getScoreColorClass(percentage: number): keyof typeof styles {
-  if (percentage >= 70) return "cardsNotesApproved";
-  if (percentage >= 40) return "cardsNotesDefault";
-  return "cardsNotesReproved";
-}
+  const {
+    tituloDisciplina,
+    dataAula,
+    titulo,
+    objetivo,
+    conteudos,
+    metodologia
+  } = route.params ?? fallback;
 
-export default function Notes() {
-  const [expanded, setExpanded] = useState<string | null>(null);
+  const [expanded, setExpanded] = React.useState(false);
 
-  function toggleCard(name: string) {
+  const toggleExpanded = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setExpanded(expanded === name ? null : name);
-  }
+    setExpanded(!expanded);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar translucent />
       <Header />
-      <ScrollView style={styles.content} overScrollMode="never">
-        <View style={styles.contentHeader}>
-          <Text style={styles.title}>Notas</Text>
+      <View style={styles.header}>
+        <Text style={styles.breadcrumb}>Plano de Aula /</Text>
+        <Text style={styles.title}>{tituloDisciplina}</Text>
+      </View>
+
+      <View style={styles.card}>
+        <Text style={styles.subTitle}>{titulo.toUpperCase()}</Text>
+        <Text style={styles.date}>Data da Aula: {dataAula}</Text>
+
+        <View style={styles.statusBox}>
+          <Text style={styles.statusText}>Aula Realizada</Text>
         </View>
 
-        <Text style={styles.contentWarningTitle}>
-          <Ionicons name="alert-circle" size={20} color="#ffb628" /> Aviso:{" "}
-          <Text style={styles.contentWarning}>
-            O resultado final pode sofrer alteração até o final do semestre. Se
-            o somatório da nota não estiver de acordo com o resultado final
-            apresentado, aguarde até o dia seguinte, pois o cálculo é executado
-            diariamente.
-          </Text>
+        <Text onPress={toggleExpanded} style={styles.toggleText}>
+          {expanded ? 'Recolher ▲' : 'Ver detalhes ▼'}
         </Text>
 
-        <View style={styles.cards}>
-          {subjects.map((subject, index) => {
-            const isExpanded = expanded === subject.name;
-            const { evaluations } = subject;
-            const score = evaluations.reduce((sum, ev) => sum + ev.score, 0);
-            const total = evaluations.reduce((sum, ev) => sum + ev.maxScore, 0);
-            const percentage = total > 0 ? (score / total) * 100 : 0;
+        {expanded && (
+          <>
+            <Text style={styles.sectionTitle}>Título</Text>
+            <Text style={styles.paragraph}>{titulo}</Text>
 
-            return (
-              <TouchableOpacity
-                key={index}
-                style={[
-                  styles.cardsContainer,
-                  isExpanded && { height: "auto", paddingBottom: 15, flexDirection: "column", alignItems: "flex-start" },
-                ]}
-                onPress={() => toggleCard(subject.name)}
-                activeOpacity={0.9}
-              >
-                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
-                  <View style={{ flex: 1 }}>
-                    <Text style={styles.cardsTitle} numberOfLines={2}>
-                      {subject.name}
-                    </Text>
-                  </View>
-                  <Text style={styles[getScoreColorClass(percentage)]}>
-                    {score}/{total || 20}
-                  </Text>
-                  {isExpanded ? (
-                    <ArrowTop width={20} height={20} style={{ marginLeft: 10 }} />
-                  ) : (
-                    <ArrowBottom width={20} height={20} style={{ marginLeft: 10 }} />
-                  )}
+            <Text style={styles.sectionTitle}>Objetivo</Text>
+            <Text style={styles.paragraph}>{objetivo}</Text>
+
+            <Text style={styles.sectionTitle}>Conteúdo</Text>
+            <View style={styles.listContainer}>
+              {conteudos.map((item, index) => (
+                <Text key={index} style={styles.listItem}>• {item}</Text>
+              ))}
+            </View>
+
+            <Text style={styles.sectionTitle}>Metodologias</Text>
+            <View style={styles.tagsContainer}>
+              {metodologia.map((item, index) => (
+                <View key={index} style={styles.tag}>
+                  <Text style={styles.tagText}>{item}</Text>
                 </View>
-                {isExpanded && evaluations.length > 0 && (
-                  <View style={{ marginTop: 10, width: "100%", gap: 8 }}>
-                    {evaluations.map((evalItem, i) => (
-                      <View key={i} style={{ borderTopWidth: 1, borderTopColor: "#ccc", paddingVertical: 5, flex: 1, }}>
-                        <Text style={{ fontWeight: "bold", }}>{evalItem.title}</Text>
-                        <View style={{ justifyContent: "space-between", flexDirection: "row", }}>
-                          <Text>Nota:</Text>
-                          <Text>{evalItem.score}/{evalItem.maxScore}</Text>
-                        </View>
-                        <View style={{ justifyContent: "space-between", flexDirection: "row", }}>
-                          <Text>Data:</Text>
-                          <Text>{evalItem.date}</Text>
-                        </View>
-                      </View>
-                    ))}
-                  </View>
-                )}
-                {isExpanded && evaluations.length === 0 && (
-                  <Text style={{ marginTop: 10, fontStyle: "italic", color: "#777" }}>
-                    Nenhuma nota disponível.
-                  </Text>
-                )}
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      </ScrollView>
+              ))}
+            </View>
+          </>
+        )}
+      </View>
     </SafeAreaView>
   );
-}
+};
+
+export default ClassPlan;
