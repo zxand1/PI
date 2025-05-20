@@ -5,15 +5,19 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
-  TouchableOpacity
+  TouchableOpacity,
+  Linking,
+  Alert
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Header from '../../components/Header';
 import styles from './styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Linking } from 'react-native';
-import RNFS from 'react-native-fs';
+import RNFS from 'expo-file-system';
 import FileViewer from 'react-native-file-viewer'
+import * as FileSystem from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
+import { Asset } from 'expo-asset';
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -153,21 +157,26 @@ const ClassPlan = () => {
 
   const abrirPdfLocal = async () => {
     try {
-      const fileName = 'Proposta PI VII.pdf';
+      const asset = Asset.fromModule(require('../../assets/pdfs/Proposta PI VII.pdf'));
+      await asset.downloadAsync();
 
-      const destPath = `${RNFS.DocumentDirectoryPath}/${fileName}`;
+      const localUri = `${FileSystem.documentDirectory}Proposta PI VII.pdf`;
 
-      if (Platform.OS === 'android') {
-        const assetPath = `bundle-assets://${fileName}`;
-        await RNFS.copyFileAssets(fileName, destPath);
+      await FileSystem.copyAsync({
+        from: asset.localUri!,
+        to: localUri
+      });
+
+      if (Platform.OS === 'ios') {
+        await FileSystem.getContentUriAsync(localUri).then(uri => {
+          Linking.openURL(uri);
+        });
       } else {
-        const assetPath = `${RNFS.MainBundlePath}/${fileName}`;
-        await RNFS.copyFile(assetPath, destPath);
+        await Sharing.shareAsync(localUri);
       }
 
-      await FileViewer.open(destPath, { showOpenWithDialog: true });
     } catch (error) {
-      console.error('Erro ao tentar abrir o PDF:', error);
+      Alert.alert('Erro ao abrir PDF', (error as any)?.message || 'Erro desconhecido');
     }
   };
 
@@ -233,8 +242,10 @@ const ClassPlan = () => {
                 </>
               )}
               <TouchableOpacity onPress={abrirPdfLocal}>
-                <Text style={styles.link}>📎 Plano_de_Aula_SI2.pdf</Text>
+                <Text style={styles.link}>📎 Abrir PDF local</Text>
               </TouchableOpacity>
+
+
 
 
             </>
