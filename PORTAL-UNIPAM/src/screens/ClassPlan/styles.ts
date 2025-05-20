@@ -98,6 +98,12 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     alignSelf: 'flex-end',
   },  
+  link: {
+  color: '#007bff',
+  textDecorationLine: 'underline',
+  marginTop: 8,
+}
+
 });
 
 export default styles;
