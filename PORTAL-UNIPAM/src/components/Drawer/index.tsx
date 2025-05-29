@@ -52,6 +52,11 @@ export default function CustomDrawerContent(props: any) {
         icon={() => <Icon name="archive" size={20} color="#014a8f" />}
         onPress={() => props.navigation.navigate('Plano de Aula')}
       />
+      <DrawerItem
+        label="Horários"
+        icon={() => <Icon name="archive" size={20} color="#014a8f" />}
+        onPress={() => props.navigation.navigate('Horários')}
+      />
     </DrawerContentScrollView>
   );
 }
