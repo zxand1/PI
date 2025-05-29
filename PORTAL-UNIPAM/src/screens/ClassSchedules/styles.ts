@@ -102,7 +102,48 @@ const styles = StyleSheet.create({
   color: '#007bff',
   textDecorationLine: 'underline',
   marginTop: 8,
-}
+},
+aulaBox: {
+  backgroundColor: '#FFFFFF',
+  borderColor: '#E0E0E0',
+  borderWidth: 1,
+  borderRadius: 8,
+  paddingVertical: 12,
+  paddingHorizontal: 16,
+  marginBottom: 12,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 1 },
+  shadowOpacity: 0.05,
+  shadowRadius: 2,
+  elevation: 1,
+},
+
+horario: {
+  fontSize: 15,
+  fontWeight: 'bold',
+  color: '#1F2937',
+  textAlign: 'right',
+  marginBottom: 8,
+},
+
+disciplina: {
+  fontSize: 14,
+  fontWeight: 'bold',
+  color: '#1F2937',
+  marginBottom: 2,
+},
+
+turma: {
+  fontSize: 13,
+  color: '#4B5563',
+  marginBottom: 2,
+},
+
+professor: {
+  fontSize: 13,
+  color: '#6B7280',
+},
+
 
 });
 
