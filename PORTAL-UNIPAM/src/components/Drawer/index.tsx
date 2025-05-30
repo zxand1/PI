@@ -57,6 +57,11 @@ export default function CustomDrawerContent(props: any) {
         icon={() => <Icon name="calendar-outline" size={20} color="#014a8f" />}
         onPress={() => props.navigation.navigate('Horários')}
       />
+      <DrawerItem
+        label="Atividades"
+        icon={() => <Icon name="calendar-outline" size={20} color="#014a8f" />}
+        onPress={() => props.navigation.navigate('Atividades')}
+      />
     </DrawerContentScrollView>
   );
 }

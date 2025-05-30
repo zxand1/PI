@@ -9,6 +9,7 @@ import Home from "../../screens/Home";
 import Finance from "../../screens/Finance";
 import ClassPlan from "../../screens/ClassPlan";
 import ClassSchedules from "../../screens/ClassSchedules";
+import Actividy from "../../screens/Actividy";
 
 const Stack = createNativeStackNavigator<propsNavigationStack>();
 
@@ -23,6 +24,7 @@ export default function StackRoutes() {
       <Stack.Screen name="Finance" component={Finance} />
       <Stack.Screen name="ClassPlan" component={ClassPlan} />
       <Stack.Screen name="ClassSchedules" component={ClassSchedules} />
+      <Stack.Screen name="Actividy" component={Actividy} />
     </Stack.Navigator>
   );
 }

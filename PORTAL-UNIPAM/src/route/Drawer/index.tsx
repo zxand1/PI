@@ -6,6 +6,7 @@ import AuthPage from "../../screens/AuthPage";
 import Finance from "../../screens/Finance";
 import ClassPlan from "../../screens/ClassPlan";
 import ClassSchedules from "../../screens/ClassSchedules";
+import Actividy from "../../screens/Actividy";
 import CustomDrawerContent from "../../components/Drawer";
 
 const Drawer = createDrawerNavigator();
@@ -27,6 +28,7 @@ export default function DrawerRoutes() {
       <Drawer.Screen name="Autenticação" component={AuthPage} />
       <Drawer.Screen name="Plano de Aula" component={ClassPlan} />
       <Drawer.Screen name="Horários" component={ClassSchedules} />
+      <Drawer.Screen name="Atividades" component={Actividy} />
     </Drawer.Navigator>
   );
 }
