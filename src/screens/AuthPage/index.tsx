@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View, Alert } from "react-native";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import { propStack } from "../../route/Models";
 
@@ -17,28 +17,14 @@ export default function AuthPage() {
   function handleFrequency() {
     navigation.navigate("Frequency");
   }
-
   function handleNotes() {
     navigation.navigate("Notes");
-      
-  useFocusEffect(
-    useCallback(() => {
-      setTimeout(() => {
-      setUsername('');
-      setPassword('');
-      setShowPassword(false);
-    }, 100);
-    }, [])
-  )
-
+  }
   function handleLogin() {
-    console.log("Usuário", username, "Senha", password);
-
     if (!username || !password) {
       Alert.alert("Campos obrigatórios", "Preencha usuário e senha");
       return;
     }
-
     if (username === "admin" && password === "1234") {
       navigation.navigate("Drawer");
     } else {
@@ -49,9 +35,7 @@ export default function AuthPage() {
   return (
     <View style={styles.container}>
       <Image source={{ uri: "https://portal.unipam.edu.br/assets/images/logo.png" }} style={styles.logo} />
-
       <Text style={styles.title}>Acessar o Portal UNIPAM</Text>
-
       <Text style={styles.label}>Usuário</Text>
       <View style={styles.inputContainer}>
         <TextInput
@@ -63,11 +47,10 @@ export default function AuthPage() {
           placeholderTextColor="#999"
         />
       </View>
-
       <Text style={styles.label}>Senha</Text>
       <View style={styles.inputContainer}>
         <TextInput
-          key={`username-${username}`}
+          key={`password-${password}`}
           style={styles.input}
           value={password}
           onChangeText={setPassword}
@@ -82,11 +65,11 @@ export default function AuthPage() {
       <TouchableOpacity style={styles.forgotPassword}>
         <Text style={styles.forgotText}>Esqueceu a Senha ou Usuário Bloqueado?</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleHome} >
+      <TouchableOpacity style={styles.button} onPress={handleHome}>
         <Ionicons name="log-in" size={16} color="#fff" />
         <Text style={styles.buttonText}>ENTRAR</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleFrequency} >
+      <TouchableOpacity style={styles.button} onPress={handleFrequency}>
         <Ionicons name="log-in" size={16} color="#fff" />
         <Text style={styles.buttonText}>frenquency</Text>
       </TouchableOpacity>
@@ -101,4 +84,3 @@ export default function AuthPage() {
     </View>
   );
 }
-

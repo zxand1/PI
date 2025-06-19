@@ -1,12 +1,12 @@
-import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
 import AuthPage from "../../screens/AuthPage";
+import Finance from "../../screens/Finance";
+import Frequency from "../../screens/Frequency";
+import Home from "../../screens/Home";
+import Notes from "../../screens/Notes";
 import DrawerRoutes from "../Drawer";
 import { propsNavigationStack } from "../Models";
-import Frequency from "../../screens/Frequency";
-import Notes from "../../screens/Notes";
-import Home from "../../screens/Home";
-import Finance from "../../screens/Finance";
 
 const Stack = createNativeStackNavigator<propsNavigationStack>();
 
