@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  LayoutAnimation,
-  Platform,
-  UIManager,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
-import Header from "../../components/Header";
-import styles from "./styles";
 import ArrowBottom from "@/assets/arrowBottom.svg";
 import ArrowTop from "@/assets/arrowTop.svg";
+import { Ionicons } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import {
+  LayoutAnimation,
+  Platform,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  UIManager,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Header from "../../components/Header";
+import styles from "./styles";
 
 interface Evaluation {
   title: string;
