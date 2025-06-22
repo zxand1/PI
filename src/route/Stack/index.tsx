@@ -7,6 +7,7 @@ import Frequency from "../../screens/Frequency";
 import Home from "../../screens/Home";
 import Notes from "../../screens/Notes";
 import DrawerRoutes from "../Drawer";
+import PlanClassroom from "../../screens/PlanClassroom";
 import { propsNavigationStack } from "../Models";
 
 const Stack = createNativeStackNavigator<propsNavigationStack>();
@@ -21,6 +22,7 @@ export default function StackRoutes() {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Finance" component={Finance} />
       <Screen name="ClassSchedules" component={ClassSchedules}/>
+      <Screen name="PlanClassroom" component={PlanClassroom}/>
     </Stack.Navigator>
   );
 }
