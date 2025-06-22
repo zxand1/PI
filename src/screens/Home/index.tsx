@@ -1,10 +1,10 @@
-import React from 'react';
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Calendar } from 'react-native-calendars';
-import styles from './styles';
-import Header from '../../components/Header';
 import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Calendar } from 'react-native-calendars';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/Header';
+import styles from './styles';
 
 interface Calendar {
   dateString: string;

@@ -1,19 +1,19 @@
+import ArrowBottom from '@/assets/arrowBottom.svg';
+import ArrowTop from '@/assets/arrowTop.svg';
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
   LayoutAnimation,
   Platform,
-  UIManager,
   StatusBar as RNStatusBar,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  UIManager,
+  View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/Header';
 import styles from './styles';
-import ArrowTop from '@/assets/arrowTop.svg';
-import ArrowBottom from '@/assets/arrowBottom.svg';
 
 interface Subject {
   name: string;
