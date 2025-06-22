@@ -15,79 +15,80 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/Header';
 import styles from './styles';
 
-interface Subject {
-  name: string;
-  totalClasses: number;
-  taughtClasses: number;
-  allowedAbsences: number;
-  absences: number;
-}
-
+// Habilitar animações no Android
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const subjects: Subject[] = [
+interface Disciplina {
+  nome: string;
+  totalAulas: number;
+  aulasDadas: number;
+  faltasPermitidas: number;
+  faltas: number;
+}
+
+const disciplinas: Disciplina[] = [
   {
-    name: 'DESENVOLVIMENTO DE SISTEMAS DE INFORMAÇÃO AVANÇADOS II',
-    totalClasses: 70,
-    taughtClasses: 30,
-    allowedAbsences: 17,
-    absences: 4,
+    nome: 'DESENVOLVIMENTO DE SISTEMAS DE INFORMAÇÃO AVANÇADOS II',
+    totalAulas: 70,
+    aulasDadas: 30,
+    faltasPermitidas: 17,
+    faltas: 4,
   },
   {
-    name: 'ECONOMIA',
-    totalClasses: 47,
-    taughtClasses: 18,
-    allowedAbsences: 11,
-    absences: 2,
+    nome: 'ECONOMIA',
+    totalAulas: 47,
+    aulasDadas: 18,
+    faltasPermitidas: 11,
+    faltas: 2,
   },
   {
-    name: 'ESTÁGIO SUPERVISIONADO I',
-    totalClasses: 103,
-    taughtClasses: 47,
-    allowedAbsences: 25,
-    absences: 5,
+    nome: 'ESTÁGIO SUPERVISIONADO I',
+    totalAulas: 103,
+    aulasDadas: 47,
+    faltasPermitidas: 25,
+    faltas: 5,
   },
   {
-    name: 'PROJETO INTEGRADOR VII',
-    totalClasses: 49,
-    taughtClasses: 18,
-    allowedAbsences: 12,
-    absences: 2,
+    nome: 'PROJETO INTEGRADOR VII',
+    totalAulas: 49,
+    aulasDadas: 18,
+    faltasPermitidas: 12,
+    faltas: 2,
   },
   {
-    name: 'TÓPICOS ESPECIAIS II',
-    totalClasses: 47,
-    taughtClasses: 20,
-    allowedAbsences: 11,
-    absences: 4,
+    nome: 'TÓPICOS ESPECIAIS II',
+    totalAulas: 47,
+    aulasDadas: 20,
+    faltasPermitidas: 11,
+    faltas: 4,
   },
   {
-    name: 'TÓPICOS INTEGRADORES II',
-    totalClasses: 110,
-    taughtClasses: 36,
-    allowedAbsences: 27,
-    absences: 20,
+    nome: 'TÓPICOS INTEGRADORES II',
+    totalAulas: 110,
+    aulasDadas: 36,
+    faltasPermitidas: 27,
+    faltas: 20,
   },
 ];
 
-function calculateAbsencePercentage(absences: number, total: number): number {
-  return parseFloat(((absences / total) * 100).toFixed(2));
+function calcularPorcentagem(faltas: number, total: number): number {
+  return parseFloat(((faltas / total) * 100).toFixed(2));
 }
 
-function getAbsenceColorStyleKey(percentage: number): keyof typeof styles {
-  if (percentage < 15) return 'cardsNotesApproved';
-  if (percentage < 24) return 'cardsNotesDefault';
+function getAbsenceColorStyleKey(percentual: number): keyof typeof styles {
+  if (percentual < 15) return 'cardsNotesApproved';
+  if (percentual < 24) return 'cardsNotesDefault';
   return 'cardsNotesReproved';
 }
 
 export default function FrequencyScreen() {
   const [expanded, setExpanded] = useState<string | null>(null);
 
-  function toggleCard(name: string) {
+  function toggleCard(nome: string) {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setExpanded(expanded === name ? null : name);
+    setExpanded(expanded === nome ? null : nome);
   }
 
   return (
@@ -102,10 +103,10 @@ export default function FrequencyScreen() {
         </View>
 
         <View style={styles.cards}>
-          {subjects.map((subject, index) => {
-            const isExpanded = expanded === subject.name;
-            const percentage = calculateAbsencePercentage(subject.absences, subject.totalClasses);
-            const colorKey = getAbsenceColorStyleKey(percentage);
+          {disciplinas.map((disciplina, index) => {
+            const isExpanded = expanded === disciplina.nome;
+            const percentual = calcularPorcentagem(disciplina.faltas, disciplina.totalAulas);
+            const colorKey = getAbsenceColorStyleKey(percentual);
 
             return (
               <TouchableOpacity
@@ -119,7 +120,7 @@ export default function FrequencyScreen() {
                     alignItems: 'flex-start',
                   },
                 ]}
-                onPress={() => toggleCard(subject.name)}
+                onPress={() => toggleCard(disciplina.nome)}
                 activeOpacity={0.9}
               >
                 <View
@@ -132,10 +133,10 @@ export default function FrequencyScreen() {
                 >
                   <View style={{ flex: 1 }}>
                     <Text style={styles.cardsTitle} numberOfLines={2}>
-                      {subject.name}
+                      {disciplina.nome}
                     </Text>
                   </View>
-                  <Text style={styles[colorKey]}>{percentage}%</Text>
+                  <Text style={styles[colorKey]}>{percentual}%</Text>
                   {isExpanded ? (
                     <ArrowTop width={20} height={20} style={{ marginLeft: 10 }} />
                   ) : (
@@ -145,12 +146,12 @@ export default function FrequencyScreen() {
 
                 {isExpanded && (
                   <View style={{ marginTop: 10, width: '100%', gap: 8 }}>
-                    <Text>Total de aulas: {subject.totalClasses}</Text>
-                    <Text>Aulas dadas: {subject.taughtClasses}</Text>
-                    <Text>Faltas permitidas: {subject.allowedAbsences}</Text>
-                    <Text>Faltas: {subject.absences}</Text>
+                    <Text>Total de aulas: {disciplina.totalAulas}</Text>
+                    <Text>Aulas dadas: {disciplina.aulasDadas}</Text>
+                    <Text>Faltas permitidas: {disciplina.faltasPermitidas}</Text>
+                    <Text>Faltas: {disciplina.faltas}</Text>
                     <Text style={{ fontWeight: 'bold' }}>
-                      Percentual de faltas: {percentage}%
+                      Percentual de faltas: {percentual}%
                     </Text>
                   </View>
                 )}

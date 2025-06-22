@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import AuthPage from "../../screens/AuthPage";
+import ClassSchedules from "../../screens/ClassSchedules";
 import Finance from "../../screens/Finance";
 import Frequency from "../../screens/Frequency";
 import Home from "../../screens/Home";
@@ -19,6 +20,7 @@ export default function StackRoutes() {
       <Stack.Screen name="Drawer" component={DrawerRoutes} />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Finance" component={Finance} />
+      <Screen name="ClassSchedules" component={ClassSchedules}/>
     </Stack.Navigator>
   );
 }
