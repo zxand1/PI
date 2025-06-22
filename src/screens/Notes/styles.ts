@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   contentWarningTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#ffb628",
+    color: "#eea30c",
     margin: 20,
     padding: 20,
     borderColor: "#ffb628",

@@ -1,22 +1,28 @@
-import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../../screens/Home";
+import React from "react";
 import AuthPage from "../../screens/AuthPage";
-import { propsNavigationStack } from "./Models";
+import ClassSchedules from "../../screens/ClassSchedules";
+import Finance from "../../screens/Finance";
 import Frequency from "../../screens/Frequency";
+import Home from "../../screens/Home";
 import Notes from "../../screens/Notes";
+import DrawerRoutes from "../Drawer";
 import PlanClassroom from "../../screens/PlanClassroom";
+import { propsNavigationStack } from "../Models";
 
-const { Navigator, Screen } = createNativeStackNavigator<propsNavigationStack>();
+const Stack = createNativeStackNavigator<propsNavigationStack>();
 
-export default function() {
-  return(
-    <Navigator initialRouteName="AuthPage" screenOptions={{headerShown: false}}>
-      <Screen name="AuthPage" component={AuthPage}/>
-      <Screen name="Home" component={Home}/>
-      <Screen name="Frequency" component={Frequency}/>
-      <Screen name="Notes" component={Notes}/>
+export default function StackRoutes() {
+  return (
+    <Stack.Navigator initialRouteName="AuthPage" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="AuthPage" component={AuthPage} />
+      <Stack.Screen name="Frequency" component={Frequency} />
+      <Stack.Screen name="Notes" component={Notes} />
+      <Stack.Screen name="Drawer" component={DrawerRoutes} />
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Finance" component={Finance} />
+      <Screen name="ClassSchedules" component={ClassSchedules}/>
       <Screen name="PlanClassroom" component={PlanClassroom}/>
-    </Navigator>
-  )
+    </Stack.Navigator>
+  );
 }
