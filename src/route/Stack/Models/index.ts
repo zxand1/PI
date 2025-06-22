@@ -5,6 +5,7 @@ export type propsNavigationStack = {
   Home: undefined;
   Frequency:undefined;
   Notes: undefined;
+  Finance: undefined;
   PlanClassroom: undefined;
   ClassSchedules: undefined;
 }
