@@ -111,12 +111,24 @@ export default function Notes() {
                 key={index}
                 style={[
                   styles.cardsContainer,
-                  isExpanded && { height: "auto", paddingBottom: 15, flexDirection: "column", alignItems: "flex-start" },
+                  isExpanded && {
+                    height: "auto",
+                    paddingBottom: 15,
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                  },
                 ]}
                 onPress={() => toggleCard(subject.name)}
                 activeOpacity={0.9}
               >
-                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
+                >
                   <View style={{ flex: 1 }}>
                     <Text style={styles.cardsTitle} numberOfLines={2}>
                       {subject.name}
@@ -131,16 +143,27 @@ export default function Notes() {
                     <ArrowBottom width={20} height={20} style={{ marginLeft: 10 }} />
                   )}
                 </View>
+
                 {isExpanded && evaluations.length > 0 && (
                   <View style={{ marginTop: 10, width: "100%", gap: 8 }}>
                     {evaluations.map((evalItem, i) => (
-                      <View key={i} style={{ borderTopWidth: 1, borderTopColor: "#ccc", paddingVertical: 5, flex: 1, }}>
-                        <Text style={{ fontWeight: "bold", }}>{evalItem.title}</Text>
-                        <View style={{ justifyContent: "space-between", flexDirection: "row", }}>
+                      <View
+                        key={i}
+                        style={{
+                          borderTopWidth: 1,
+                          borderTopColor: "#ccc",
+                          paddingVertical: 5,
+                          flex: 1,
+                        }}
+                      >
+                        <Text style={{ fontWeight: "bold" }}>{evalItem.title}</Text>
+                        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                           <Text>Nota:</Text>
-                          <Text>{evalItem.score}/{evalItem.maxScore}</Text>
+                          <Text>
+                            {evalItem.score}/{evalItem.maxScore}
+                          </Text>
                         </View>
-                        <View style={{ justifyContent: "space-between", flexDirection: "row", }}>
+                        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                           <Text>Data:</Text>
                           <Text>{evalItem.date}</Text>
                         </View>
@@ -148,6 +171,7 @@ export default function Notes() {
                     ))}
                   </View>
                 )}
+
                 {isExpanded && evaluations.length === 0 && (
                   <Text style={{ marginTop: 10, fontStyle: "italic", color: "#777" }}>
                     Nenhuma nota disponível.

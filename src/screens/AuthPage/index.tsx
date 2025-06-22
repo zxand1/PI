@@ -11,15 +11,6 @@ export default function AuthPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  function handleHome() {
-    navigation.navigate("Drawer");
-  }
-  function handleFrequency() {
-    navigation.navigate("Frequency");
-  }
-  function handleNotes() {
-    navigation.navigate("Notes");
-  }
   function handleLogin() {
     if (!username || !password) {
       Alert.alert("Campos obrigatórios", "Preencha usuário e senha");
@@ -64,18 +55,6 @@ export default function AuthPage() {
       </View>
       <TouchableOpacity style={styles.forgotPassword}>
         <Text style={styles.forgotText}>Esqueceu a Senha ou Usuário Bloqueado?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleHome}>
-        <Ionicons name="log-in" size={16} color="#fff" />
-        <Text style={styles.buttonText}>ENTRAR</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleFrequency}>
-        <Ionicons name="log-in" size={16} color="#fff" />
-        <Text style={styles.buttonText}>frenquency</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleNotes}>
-        <Ionicons name="log-in" size={16} color="#fff" />
-        <Text style={styles.buttonText}>NOTES</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Ionicons name="log-in" size={16} color="#fff" />
