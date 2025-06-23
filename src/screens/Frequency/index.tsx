@@ -95,13 +95,14 @@ export default function FrequencyScreen() {
     <SafeAreaView style={styles.container}>
       <RNStatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
       <Header />
-      <ScrollView style={styles.content} overScrollMode="never">
+      
         <View style={styles.header}>
           <Text style={styles.greeting}>Olá, MATHEUS HENRIQUE DE DEUS</Text>
           <Text style={styles.registro}>REGISTRO ACADÊMICO: 22007228</Text>
           <Text style={styles.sistema}>SISTEMAS DE INFORMAÇÃO</Text>
         </View>
 
+      <ScrollView style={styles.content} overScrollMode="never">
         <View style={styles.cards}>
           {disciplinas.map((disciplina, index) => {
             const isExpanded = expanded === disciplina.nome;

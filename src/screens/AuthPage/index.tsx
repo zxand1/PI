@@ -30,7 +30,6 @@ export default function AuthPage() {
       <Text style={styles.label}>Usuário</Text>
       <View style={styles.inputContainer}>
         <TextInput
-          key={`username-${username}`}
           style={styles.input}
           value={username}
           onChangeText={setUsername}
@@ -41,7 +40,6 @@ export default function AuthPage() {
       <Text style={styles.label}>Senha</Text>
       <View style={styles.inputContainer}>
         <TextInput
-          key={`password-${password}`}
           style={styles.input}
           value={password}
           onChangeText={setPassword}

@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <View style={styles.header}>
       <Logo width={40} height={40} />
-      <TouchableOpacity onPress={handleLogout} style={{ marginRight: 16}}>
+      <TouchableOpacity onPress={handleLogout} style={{ marginLeft: '65%'}}>
         <Ionicons name="log-out-outline" size={28} color="white" />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.openDrawer()}>
