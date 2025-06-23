@@ -5,9 +5,9 @@ import { Picker } from '@react-native-picker/picker';
 import Header from '../../components/Header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
-import { NavigationProps } from '../../route/Models';
+import { propStack } from '../../route/Models';
 
-const navigation = useNavigation<NavigationProps>();
+const navigation = useNavigation<propStack>();
 
 const handlePress = (item: any) => {
         navigation.navigate('Detalhes', { atividade: item });

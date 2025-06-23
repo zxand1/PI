@@ -1,7 +1,6 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RouteProp } from "@react-navigation/native";
 
-export type RootStackParamList = {
+export type propsNavigationStack= {
   AuthPage: undefined;
   Home: undefined;
   Frequency: undefined;
@@ -14,7 +13,5 @@ export type RootStackParamList = {
   Detalhes: { atividade: any };
 };
 
+export type propStack = NativeStackNavigationProp<propsNavigationStack>
 
-export type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
-
-export type DetalhesRouteProp = RouteProp<RootStackParamList, 'Detalhes'>;
