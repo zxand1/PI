@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
+    marginBottom: 10,
   },
   content: {
     flex: 1,
@@ -73,6 +75,18 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     color: 'white',
     overflow: 'hidden',
+  },
+  accordionContainer: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    marginVertical: 6,
+    backgroundColor: '#fff',
+    overflow: 'hidden',
+  },
+  details: {
+    padding: 16,
+    backgroundColor: '#f0f0f0',
   },
   legendaContainer: {
     marginTop: 20,

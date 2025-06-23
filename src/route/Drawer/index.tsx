@@ -1,11 +1,12 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import Home from "../../screens/Home";
-import Frequency from "../../screens/Frequency";
-import Notes from "../../screens/Notes";
+import React from "react";
+import CustomDrawerContent from "../../components/Drawer";
 import AuthPage from "../../screens/AuthPage";
 import Finance from "../../screens/Finance";
+import Frequency from "../../screens/Frequency";
+import Home from "../../screens/Home";
+import Notes from "../../screens/Notes";
 import Materials from "../../screens/Materiais";
-import CustomDrawerContent from "../../components/Drawer";
 
 const Drawer = createDrawerNavigator();
 

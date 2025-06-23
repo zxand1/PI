@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  LayoutAnimation,
-  Platform,
-  UIManager,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
-import Header from "../../components/Header";
-import styles from "./styles";
 import ArrowBottom from "@/assets/arrowBottom.svg";
 import ArrowTop from "@/assets/arrowTop.svg";
+import { Ionicons } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import {
+  LayoutAnimation,
+  Platform,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  UIManager,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Header from "../../components/Header";
+import styles from "./styles";
 
 interface Evaluation {
   title: string;
@@ -111,12 +111,24 @@ export default function Notes() {
                 key={index}
                 style={[
                   styles.cardsContainer,
-                  isExpanded && { height: "auto", paddingBottom: 15, flexDirection: "column", alignItems: "flex-start" },
+                  isExpanded && {
+                    height: "auto",
+                    paddingBottom: 15,
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                  },
                 ]}
                 onPress={() => toggleCard(subject.name)}
                 activeOpacity={0.9}
               >
-                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
+                >
                   <View style={{ flex: 1 }}>
                     <Text style={styles.cardsTitle} numberOfLines={2}>
                       {subject.name}
@@ -134,13 +146,23 @@ export default function Notes() {
                 {isExpanded && evaluations.length > 0 && (
                   <View style={{ marginTop: 10, width: "100%", gap: 8 }}>
                     {evaluations.map((evalItem, i) => (
-                      <View key={i} style={{ borderTopWidth: 1, borderTopColor: "#ccc", paddingVertical: 5, flex: 1, }}>
-                        <Text style={{ fontWeight: "bold", }}>{evalItem.title}</Text>
-                        <View style={{ justifyContent: "space-between", flexDirection: "row", }}>
+                      <View
+                        key={i}
+                        style={{
+                          borderTopWidth: 1,
+                          borderTopColor: "#ccc",
+                          paddingVertical: 5,
+                          flex: 1,
+                        }}
+                      >
+                        <Text style={{ fontWeight: "bold" }}>{evalItem.title}</Text>
+                        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                           <Text>Nota:</Text>
-                          <Text>{evalItem.score}/{evalItem.maxScore}</Text>
+                          <Text>
+                            {evalItem.score}/{evalItem.maxScore}
+                          </Text>
                         </View>
-                        <View style={{ justifyContent: "space-between", flexDirection: "row", }}>
+                        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                           <Text>Data:</Text>
                           <Text>{evalItem.date}</Text>
                         </View>
