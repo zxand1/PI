@@ -8,7 +8,7 @@ import Home from "../../screens/Home";
 import Notes from "../../screens/Notes";
 import PlanClassroom from "../../screens/PlanClassroom";
 import DrawerRoutes from "../Drawer";
-import { propsNavigationStack } from "../Models";
+import { propsNavigationStack } from "./Models";
 
 const Stack = createNativeStackNavigator<propsNavigationStack>();
 
