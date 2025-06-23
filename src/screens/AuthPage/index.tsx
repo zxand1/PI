@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View, Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import styles from "./styles";
 import { propStack } from "../../route/Models";
 
@@ -11,11 +11,22 @@ export default function AuthPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  useFocusEffect(
+    useCallback(() => {
+      setTimeout(() => {
+      setUsername('');
+      setPassword('');
+      setShowPassword(false);
+    }, 100);
+    }, [])
+  )
+
   function handleLogin() {
     if (!username || !password) {
       Alert.alert("Campos obrigatórios", "Preencha usuário e senha");
       return;
     }
+    
     if (username === "admin" && password === "1234") {
       navigation.navigate("Drawer");
     } else {

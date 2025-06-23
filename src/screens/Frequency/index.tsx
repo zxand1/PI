@@ -15,7 +15,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/Header';
 import styles from './styles';
 
-// Habilitar animações no Android
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
@@ -95,13 +94,11 @@ export default function FrequencyScreen() {
     <SafeAreaView style={styles.container}>
       <RNStatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
       <Header />
-      
         <View style={styles.header}>
           <Text style={styles.greeting}>Olá, MATHEUS HENRIQUE DE DEUS</Text>
           <Text style={styles.registro}>REGISTRO ACADÊMICO: 22007228</Text>
           <Text style={styles.sistema}>SISTEMAS DE INFORMAÇÃO</Text>
         </View>
-
       <ScrollView style={styles.content} overScrollMode="never">
         <View style={styles.cards}>
           {disciplinas.map((disciplina, index) => {

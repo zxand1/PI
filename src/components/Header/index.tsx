@@ -1,4 +1,3 @@
-
 import Logo from "@/assets/logoWhite.svg";
 import Menu from "@/assets/menu.svg";
 import { Ionicons } from "@expo/vector-icons";

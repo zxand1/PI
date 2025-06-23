@@ -143,7 +143,6 @@ export default function Notes() {
                     <ArrowBottom width={20} height={20} style={{ marginLeft: 10 }} />
                   )}
                 </View>
-
                 {isExpanded && evaluations.length > 0 && (
                   <View style={{ marginTop: 10, width: "100%", gap: 8 }}>
                     {evaluations.map((evalItem, i) => (
@@ -171,7 +170,6 @@ export default function Notes() {
                     ))}
                   </View>
                 )}
-
                 {isExpanded && evaluations.length === 0 && (
                   <Text style={{ marginTop: 10, fontStyle: "italic", color: "#777" }}>
                     Nenhuma nota disponível.

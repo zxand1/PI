@@ -1,3 +1,4 @@
+
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
@@ -20,7 +21,7 @@ export default function Home() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar translucent />
+      <StatusBar translucent /
       <Header />
       <ScrollView contentContainerStyle={styles.container2}>
         <View style={styles.header}>
@@ -59,7 +60,6 @@ export default function Home() {
             <Text style={styles.sistema}>PROJETO INTEGRADOR VII</Text>
           </TouchableOpacity>
         </View>
-
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Calendário</Text>
           <Text style={styles.date}>Abril - 2025</Text>
@@ -119,4 +119,4 @@ export default function Home() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
