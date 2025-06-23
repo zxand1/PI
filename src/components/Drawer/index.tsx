@@ -35,32 +35,32 @@ export default function CustomDrawerContent(props: any) {
       <DrawerItem
         label="Frequência"
         icon={() => <Icon name="chart-line" size={20} color="#014a8f" />}
-        onPress={() => props.navigation.navigate('Frequência')}
+        onPress={() => props.navigation.navigate('Frequency')}
       />
       <DrawerItem
         label="Notas"
         icon={() => <Icon name="clipboard-text-outline" size={20} color="#014a8f" />}
-        onPress={() => props.navigation.navigate('Notas')}
+        onPress={() => props.navigation.navigate('Notes')}
       />
       <DrawerItem
         label="Financeiro"
         icon={() => <Icon name="cash-multiple" size={20} color="#014a8f" />}
-        onPress={() => props.navigation.navigate('Financeiro')}
+        onPress={() => props.navigation.navigate('Finance')}
       />
       <DrawerItem
         label="Plano de Aula"
         icon={() => <Icon name="archive" size={20} color="#014a8f" />}
-        onPress={() => props.navigation.navigate('Plano de Aula')}
+        onPress={() => props.navigation.navigate('ClassPlan')}
       />
       <DrawerItem
         label="Horários"
         icon={() => <Icon name="calendar-outline" size={20} color="#014a8f" />}
-        onPress={() => props.navigation.navigate('Horários')}
+        onPress={() => props.navigation.navigate('ClassSchedules')}
       />
       <DrawerItem
         label="Atividades"
         icon={() => <Icon name="calendar-outline" size={20} color="#014a8f" />}
-        onPress={() => props.navigation.navigate('Atividades')}
+        onPress={() => props.navigation.navigate('Actividy')}
       />
     </DrawerContentScrollView>
   );
