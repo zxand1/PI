@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
-import {
-  Text,
-  View,
-  LayoutAnimation,
-  Platform,
-  UIManager,
-  TouchableOpacity,
-  Linking,
-  Alert
-} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import Header from '../../components/Header';
-import styles from './styles';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import RNFS from 'expo-file-system';
-import FileViewer from 'react-native-file-viewer'
+import { Asset } from 'expo-asset';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
-import { Asset } from 'expo-asset';
+import React, { useState } from 'react';
+import {
+  Alert,
+  LayoutAnimation,
+  Linking,
+  Platform,
+  Text,
+  TouchableOpacity,
+  UIManager,
+  View
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/Header';
+import styles from './styles';
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);

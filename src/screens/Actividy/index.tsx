@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
-import Header from '../../components/Header';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/Header';
+import { PropStack } from '../../routes/Stack';
 import styles from './styles';
-import { propStack } from '../../route/Models';
 
-const navigation = useNavigation<propStack>();
+
+const navigation = useNavigation<PropStack>();
 
 const handlePress = (item: any) => {
-        navigation.navigate('Detalhes', { atividade: item });
-    };
+    navigation.navigate('Detalhes', { atividade: item });
+};
 
 const DATA = [
     { id: '1', disciplina: 'Matemática', situacao: 'Em andamento', participacao: 'Sim' },
@@ -21,11 +22,11 @@ const DATA = [
 
 export default function Actividy() {
 
-    
 
-    const [disciplina, setDisciplina] = useState('');
+
+    const [disciplina, setDisciplina] = useState("");
     const [situacao, setSituacao] = useState('Em andamento');
-    const [participacao, setParticipacao] = useState('');
+    const [participacao, setParticipacao] = useState("");
 
     const disciplinasUnicas = [...new Set(DATA.map(item => item.disciplina))];
 

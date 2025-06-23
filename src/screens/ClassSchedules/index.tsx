@@ -1,14 +1,14 @@
+import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react';
 import {
-  Text,
-  View,
   Platform,
+  Text,
   UIManager,
+  View,
 } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/Header';
 import styles from './styles';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);

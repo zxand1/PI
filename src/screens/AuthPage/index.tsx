@@ -3,10 +3,10 @@ import React, { useState, useCallback } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View, Alert } from "react-native";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import styles from "./styles";
-import { propStack } from "../../route/Models";
+import { PropStack } from "../../routes/Stack";
 
 export default function AuthPage() {
-  const navigation = useNavigation<propStack>();
+  const navigation = useNavigation<PropStack>();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
