@@ -8,6 +8,7 @@ import Home from "../../screens/Home";
 import Notes from "../../screens/Notes";
 import Materials from "../../screens/Materiais";
 import PlanClassroom from "../../screens/PlanClassroom";
+import Actividy from "../../screens/Actividy";
 import DrawerRoutes from "../Drawer";
 import { propsNavigationStack } from "./Models";
 
@@ -25,6 +26,7 @@ export default function StackRoutes() {
       <Stack.Screen name="ClassSchedules" component={ClassSchedules} />
       <Stack.Screen name="Finance" component={Finance} />
       <Stack.Screen name="PlanClassroom" component={PlanClassroom} />
+      <Stack.Screen name="Actividy" component={Actividy} />
     </Stack.Navigator>
   );
 }

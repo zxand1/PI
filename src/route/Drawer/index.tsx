@@ -7,6 +7,7 @@ import Frequency from "../../screens/Frequency";
 import Home from "../../screens/Home";
 import Notes from "../../screens/Notes";
 import Materials from "../../screens/Materiais";
+import Acvitidy from "../../screens/Actividy";
 
 const Drawer = createDrawerNavigator();
 
@@ -26,6 +27,7 @@ export default function DrawerRoutes() {
       <Drawer.Screen name="Financeiro" component={Finance} />
       <Drawer.Screen name="Autenticação" component={AuthPage} />
       <Drawer.Screen name="Materiais" component={Materials} />
+      <Drawer.Screen name="Acvitidy" component={Acvitidy} />
     </Drawer.Navigator>
   );
 }

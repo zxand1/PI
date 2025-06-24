@@ -21,8 +21,9 @@ export default function Home() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar translucent /
+      <StatusBar translucent />
       <Header />
+
       <ScrollView contentContainerStyle={styles.container2}>
         <View style={styles.header}>
           <Text style={styles.greeting}>Olá, MATHEUS HENRIQUE DE DEUS</Text>
