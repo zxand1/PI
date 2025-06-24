@@ -74,6 +74,10 @@ export default function Actividy() {
         <SafeAreaView style={styles.container}>
             <Header />
 
+            <View style={styles.tituloPag}>
+                <Text style={styles.titulo}>Atividades</Text>
+            </View>
+
             <View style={styles.filtros}>
                 <Text style={styles.label}>Disciplina</Text>
                 <Picker

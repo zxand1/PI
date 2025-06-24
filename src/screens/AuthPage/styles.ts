@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   logo: {
-    width: 80,
+    width: 90,
     height: 80,
     marginBottom: 20,
   },
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   label: {
     alignSelf: "flex-start",
-    color: "#999",
+    color: "black",
     marginBottom: 5,
     marginLeft: 5,
   },

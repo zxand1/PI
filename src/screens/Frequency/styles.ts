@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   cardsNotesApproved: {
     paddingHorizontal: 7,
     paddingVertical: 2,
-    backgroundColor: '#6fc872cc',
+    backgroundColor: '#228B22',
     borderRadius: 20,
     color: 'white',
     overflow: 'hidden',

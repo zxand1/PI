@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   contentWarningTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#eea30c",
+    color: "#e59200",
     margin: 20,
     padding: 20,
     borderColor: "#ffb628",
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   contentWarning: {
     fontWeight: "regular",
     fontSize: 15,
+    color: "#e59200",
   },
   cards: {
     flex: 1,

@@ -5,7 +5,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#F6F8FA',
   },
-  filtros:{
+  filtros: {
     padding: 16,
   },
   header: {
@@ -20,14 +20,14 @@ export default StyleSheet.create({
   picker: {
     backgroundColor: '#f0f0f0',
     borderRadius: 4,
-    marginBottom: 8, 
+    marginBottom: 8,
   },
   item: {
     padding: 8,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
-  card:{
+  card: {
     backgroundColor: '#fff',
     padding: 12,
     marginVertical: 8,
@@ -35,22 +35,34 @@ export default StyleSheet.create({
     borderRadius: 8,
     elevation: 2,
   },
-  title:{
-    fontWeight:'bold',
+  title: {
+    fontWeight: 'bold',
     fontSize: 16,
   },
-  expandToggle:{
+  expandToggle: {
     color: '#007BFF',
     marginTop: 4,
   },
-  detail:{
+  detail: {
     marginTop: 12,
   },
-  subtitle:{
+  subtitle: {
     fontWeight: 'bold',
     marginTop: 8,
   },
-  fileName:{
-    
-  }
+  fileName: {
+    fontSize: 14,
+    color: '#000',
+    marginTop: 4,
+    fontWeight: 'bold',
+  },
+  tituloPag: {
+    flexDirection: "row",
+    marginLeft: 10,
+    marginTop: 15,
+  },
+  titulo: {
+    color: "#000",
+    fontSize: 30,
+  },
 });

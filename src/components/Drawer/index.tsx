@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './style';
+import AuthPage from '../../screens/AuthPage';
 
 export default function CustomDrawerContent(props: any) {
   return (
@@ -21,7 +22,7 @@ export default function CustomDrawerContent(props: any) {
             <Text style={styles.raLabel}>REGISTRO ACADÊMICO:</Text>
             <Text style={styles.raValue}>22007289</Text>
           </View>
-          <TouchableOpacity style={styles.logoutButton}>
+          <TouchableOpacity style={styles.logoutButton} onPress={() => props.navigation.navigate('AuthPage')}>
             <Text style={styles.logoutText}>Sair</Text>
           </TouchableOpacity>
         </View>
@@ -49,12 +50,12 @@ export default function CustomDrawerContent(props: any) {
       />
       <DrawerItem
         label="Materiais"
-        icon={() => <Icon name="cash-multiple" size={20} color="#014a8f" />}
+        icon={() => <Icon name="archive" size={20} color="#014a8f" />}
         onPress={() => props.navigation.navigate('Materiais')}
       />
       <DrawerItem
         label="Atividades"
-        icon={() => <Icon name="cash-multiple" size={20} color="#014a8f" />}
+        icon={() => <Icon name="book" size={20} color="#014a8f" />}
         onPress={() => props.navigation.navigate('Actividy')}
       />
     </DrawerContentScrollView>

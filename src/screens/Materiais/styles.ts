@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
   contentHeader2: {
     width: "100%",
     paddingHorizontal: 20,
-    paddingVertical: 20,
     flexDirection: "row",
     alignItems: "center",
     gap: 20,
@@ -67,7 +66,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     width: 250,
   },
-  
   cardsMaterialsDefault: {
     paddingHorizontal: 7,
     paddingVertical: 2,
@@ -143,7 +141,9 @@ textoBotaoBaixar: {
   fontWeight: "bold",
   fontSize: 16,
 },
-
+selectedDisciplina: {
+  
+},
 });
 
 export default styles;

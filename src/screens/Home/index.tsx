@@ -1,6 +1,6 @@
 
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useState} from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -18,6 +18,8 @@ interface Calendar {
 export default function Home() {
   const currentDate = new Date();
   const formattedDate = currentDate.toISOString().split('T')[0];
+
+  const [selectedDate, setSelectedDate] = useState<string>(formattedDate);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -66,9 +68,9 @@ export default function Home() {
           <Text style={styles.date}>Abril - 2025</Text>
 
           <Calendar
-            current={formattedDate}
+            current={selectedDate}
             markedDates={{
-              [formattedDate]: {
+              [selectedDate]: {
                 selected: true,
                 selectedColor: '#003366',
                 selectedTextColor: 'white',
@@ -76,6 +78,7 @@ export default function Home() {
             }}
             monthFormat={'yyyy - MM'}
             onDayPress={(day: Calendar) => {
+              setSelectedDate(day.dateString);
               console.log('Data selecionada:', day.dateString);
             }}
             theme={{

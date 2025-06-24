@@ -36,7 +36,7 @@ export default function AuthPage() {
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri: "https://portal.unipam.edu.br/assets/images/logo.png" }} style={styles.logo} />
+      <Image source={{ uri: "https://portal.unipam.edu.br/assets/media/img/logo/logo-4.png" }} style={styles.logo} />
       <Text style={styles.title}>Acessar o Portal UNIPAM</Text>
       <Text style={styles.label}>Usuário</Text>
       <View style={styles.inputContainer}>

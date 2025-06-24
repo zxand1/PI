@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   card: {
-    backgroundColor: 'blue',
+    backgroundColor: '#1E90FF',
     padding: 16,
     borderRadius: 8,
     width: '30%',
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
 
   card2: {
-    backgroundColor: 'red',
+    backgroundColor: '#FF6347',
     padding: 16,
     borderRadius: 8,
     marginLeft: 6,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
 
   card3: {
-    backgroundColor: 'green',
+    backgroundColor: '#3CB371',
     padding: 16,
     borderRadius: 8,
     marginLeft: 6,
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: 'red', // Cor para o status do horário
+    backgroundColor: 'red',
     marginRight: 10,
   },
   timeText: {
