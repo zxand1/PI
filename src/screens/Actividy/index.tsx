@@ -1,12 +1,15 @@
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { FlatList, Text, TouchableOpacity, View, Button } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View, Button, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/Header';
 import { propStack } from '../../route/Models';
 import styles from './styles';
 import * as DocumentPicker from 'expo-document-picker';
+import * as FileSystem from 'expo-file-system';
+import * as Linking from 'expo-linking';
+import * as Sharing from 'expo-sharing';
 
 const DATA = [
     { id: '1', disciplina: 'Matemática', situacao: 'Em andamento', participacao: 'Sim' },
@@ -33,12 +36,39 @@ export default function Actividy() {
         (participacao ? item.participacao === participacao : true)
     );
 
+    const [selectedFile, setSelectedFile] = useState<any>(null);
+
     const handlePickFile = async () => {
         const result = await DocumentPicker.getDocumentAsync({});
         if (result.assets && result.assets.length > 0) {
+            setSelectedFile(result.assets[0]);
+            setParticipacao("Sim");
             alert(`Arquivo selecionado: ${result.assets[0].name}`);
         }
+        else{
+            setSelectedFile(null);
+            setParticipacao("Nao");
+        }
     }
+
+    const handleDownloadFile = async () => {
+    if (selectedFile && selectedFile.uri) {
+        try {
+            const destPath = FileSystem.documentDirectory + selectedFile.name;
+            await FileSystem.copyAsync({
+                from: selectedFile.uri,
+                to: destPath,
+            });
+            if (await Sharing.isAvailableAsync()) {
+                await Sharing.shareAsync(destPath);
+            } else {
+                alert('Compartilhamento não disponível neste dispositivo.');
+            }
+        } catch (error) {
+            alert('Não foi possível abrir o arquivo.');
+        }
+    }
+};
 
     return (
         <SafeAreaView style={styles.container}>
@@ -89,7 +119,7 @@ export default function Actividy() {
                         <View style={styles.card}>
                             <TouchableOpacity onPress={() => setExpandedId(isExpanded ? null : item.id)}>
                                 <Text style={styles.title}>
-                                    {item.disciplina} - {item.situacao} - Participação: {item.participacao}
+                                    {item.disciplina} - {item.situacao} - Participação: {selectedFile ? "Sim" : "Nao"}
                                 </Text>
                                 <Text style={styles.expandToggle}>{isExpanded ? 'Recolher ▲' : 'Expandir ▼'}</Text>
                             </TouchableOpacity>
@@ -102,14 +132,15 @@ export default function Actividy() {
                                     <Text style={styles.subtitle}>Objetivo:</Text>
                                     <Text>Apresentar os objetivos da disciplina e ferramentas usadas.</Text>
 
-                                    <Text style={styles.subtitle}>Conteúdo:</Text>
-                                    <Text>• Apresentação da ementa{'\n'}• Configuração de ambiente{'\n'}• Instalação do React Native</Text>
-
-                                    <Text style={styles.subtitle}>Metodologias:</Text>
-                                    <Text>• Aula expositiva{'\n'}• Resolução prática de exercícios</Text>
-
                                     <Text style={styles.subtitle}>Anexo:</Text>
                                     <Button title="Anexar Arquivo" onPress={handlePickFile} />
+                                    { }
+                                    {selectedFile && (
+                                        <>
+                                            <Text style={styles.fileName}>Arquivo: {selectedFile.name}</Text>
+                                            <Button title="Abrir Arquivo" onPress={handleDownloadFile} />
+                                        </>
+                                    )}
                                 </View>
                             )}
                         </View>

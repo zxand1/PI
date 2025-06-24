@@ -49,5 +49,8 @@ export default StyleSheet.create({
   subtitle:{
     fontWeight: 'bold',
     marginTop: 8,
+  },
+  fileName:{
+    
   }
 });

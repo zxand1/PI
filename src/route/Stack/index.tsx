@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator<propsNavigationStack>();
 
 export default function StackRoutes() {
   return (
-    <Stack.Navigator initialRouteName="AuthPage" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="Actividy" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="AuthPage" component={AuthPage} />
       <Stack.Screen name="Frequency" component={Frequency} />
       <Stack.Screen name="Notes" component={Notes} />
