@@ -24,12 +24,14 @@ export default function Header() {
   return (
     <View style={styles.header}>
       <Logo width={40} height={40} />
-      <TouchableOpacity onPress={handleLogout} style={{ marginLeft: '65%'}}>
-        <Ionicons name="log-out-outline" size={28} color="white" />
-      </TouchableOpacity>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
       <TouchableOpacity onPress={() => navigation.openDrawer()}>
-        <Menu width={40} height={40} color={"white"} />
+        <Menu width={40} height={40} color={"white"}/>
       </TouchableOpacity>
+      <TouchableOpacity onPress={handleLogout} style={{ }}>
+        <Ionicons name="log-out-outline" size={35} color="white" />
+      </TouchableOpacity>
+      </View>
     </View>
   );
 }

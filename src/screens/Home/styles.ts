@@ -75,15 +75,14 @@ const styles = StyleSheet.create({
   },
   item: {
     padding: 12,
-    backgroundColor: '#003366',
     marginBottom: 8,
     borderRadius: 6,
+    color: 'white',
   },
   date: {
     fontSize: 16,
     color: '#003366',
   },
-  // Estilos para os horários
   timeSlot: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -104,6 +103,40 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     color: '#333',
   },
+  section2: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+    borderRadius: 8,
+    paddingHorizontal: 13,
+    width: '100%',
+  },
+  pendente: {
+    backgroundColor: '#FF6347',
+    borderRadius: 8,
+    alignItems: 'center',
+    padding: 5,
+    textAlign: 'center',
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: '#FFFAFA',
+    marginLeft: 8,
+  },
+  buttonDisciplina: {
+    backgroundColor: '#003366',
+    borderRadius: 8,
+    marginTop: 10,
+  },
+  itemDetalhe: {
+    flexDirection: 'column',
+    color: 'white',
+    padding: '1%',
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#ccc',
+    marginVertical: 4,
+  }
 });
 
 export default styles;
