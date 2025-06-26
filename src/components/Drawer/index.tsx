@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './style';
 import AuthPage from '../../screens/AuthPage';
@@ -57,6 +58,11 @@ export default function CustomDrawerContent(props: any) {
         label="Atividades"
         icon={() => <Icon name="book" size={20} color="#014a8f" />}
         onPress={() => props.navigation.navigate('Actividy')}
+      />
+      <DrawerItem
+        label="Contatos"
+        icon={() => <Icon name="contacts" size={20} color="#014a8f" />}
+        onPress={() => props.navigation.navigate('Contacts')}
       />
     </DrawerContentScrollView>
   );

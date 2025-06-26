@@ -10,6 +10,8 @@ export type propsNavigationStack = {
   Materials: undefined;
   Actividy: undefined;
   PlanClassroom: undefined;
+  contacts: undefined;
+  Links: undefined;
 }
 
 export type propStack = NativeStackNavigationProp<propsNavigationStack>
