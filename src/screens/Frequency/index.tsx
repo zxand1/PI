@@ -94,11 +94,11 @@ export default function FrequencyScreen() {
     <SafeAreaView style={styles.container}>
       <RNStatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
       <Header />
-        <View style={styles.header}>
-          <Text style={styles.greeting}>Olá, MATHEUS HENRIQUE DE DEUS</Text>
-          <Text style={styles.registro}>REGISTRO ACADÊMICO: 22007228</Text>
-          <Text style={styles.sistema}>SISTEMAS DE INFORMAÇÃO</Text>
-        </View>
+
+      <View style={styles.tituloPag}>
+        <Text style={styles.titulo}>Frequencia</Text>
+      </View>
+
       <ScrollView style={styles.content} overScrollMode="never">
         <View style={styles.cards}>
           {disciplinas.map((disciplina, index) => {

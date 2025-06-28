@@ -16,7 +16,7 @@ export default function CustomDrawerContent(props: any) {
         <View style={styles.avatar}>
           <Text style={styles.avatarText}>A</Text>
         </View>
-        <Text style={styles.userName}>ALEXANDRE DE OLIVEIRA PINHEIRO</Text>
+        <Text style={styles.userName}>MATHEUS HENRIQUE DE DEUS</Text>
         <View style={{flexDirection: 'row', gap: 20,}}>
           <View style={styles.raContainer}>
             <Text style={styles.raLabel}>REGISTRO ACADÊMICO:</Text>

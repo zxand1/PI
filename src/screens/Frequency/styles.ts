@@ -108,6 +108,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333',
   },
+  tituloPag: {
+    width: "100%",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 20,
+  },
+  titulo: {
+    color: "#000",
+    fontSize: 30,
+  }
 });
 
 export default styles;
