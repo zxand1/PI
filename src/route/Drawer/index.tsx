@@ -8,7 +8,7 @@ import Home from "../../screens/Home";
 import Notes from "../../screens/Notes";
 import Materials from "../../screens/Materiais";
 import Actividy from "../../screens/Actividy";
-
+import Contacts from "../../screens/Contacts";
 const Drawer = createDrawerNavigator();
 
 export default function DrawerRoutes() {
@@ -28,6 +28,8 @@ export default function DrawerRoutes() {
       <Drawer.Screen name="Autenticação" component={AuthPage} />
       <Drawer.Screen name="Materiais" component={Materials} />
       <Drawer.Screen name="Actividy" component={Actividy} />
+      <Drawer.Screen name="Contacts" component={Contacts} />
+      
     </Drawer.Navigator>
   );
 }
