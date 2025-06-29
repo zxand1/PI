@@ -9,7 +9,27 @@ import Notes from "../../screens/Notes";
 import Materials from "../../screens/Materiais";
 import Actividy from "../../screens/Actividy";
 import Contacts from "../../screens/Contacts";
+import Bolsas from "../../screens/Links/Bolsas";
+import Unichamdos from "../../screens/Links/Unichamados";
+import Eventos from "../../screens/Links/Eventos";
+import Wifi from "../../screens/Links/Wifi";
 const Drawer = createDrawerNavigator();
+
+
+
+
+function SubDrawer() {
+  const Stack = require('@react-navigation/native-stack').createNativeStackNavigator();
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Bolsas" component={Bolsas} />
+      <Stack.Screen name="UniChamados" component={Unichamdos} />
+      <Stack.Screen name="Eventos" component={Eventos} />
+      <Stack.Screen name="Wifi UNIPAM" component={Wifi} />
+    </Stack.Navigator>
+  );
+}
 
 export default function DrawerRoutes() {
   return (
@@ -29,7 +49,11 @@ export default function DrawerRoutes() {
       <Drawer.Screen name="Materiais" component={Materials} />
       <Drawer.Screen name="Actividy" component={Actividy} />
       <Drawer.Screen name="Contacts" component={Contacts} />
-      
+      <Drawer.Screen name="SubDrawer" component={SubDrawer} />
     </Drawer.Navigator>
+
+
+
+
   );
 }
