@@ -178,8 +178,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginTop: 10,
     padding: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'column',
     justifyContent: 'space-between',
     elevation: 2,
     shadowColor: '#003366',
@@ -189,11 +188,9 @@ const styles = StyleSheet.create({
   },
   itemDetalhe: {
     flexDirection: 'column',
-    color: '#003366',
-    backgroundColor: '#eaf0fa',
+    color: '#eaf0fa',
     borderRadius: 8,
     padding: 8,
-    marginTop: 6,
     fontSize: 14,
   },
   separator: {

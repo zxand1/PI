@@ -1,5 +1,5 @@
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -11,32 +11,56 @@ import styles from './style';
 
 export default function CustomDrawerContent(props: any) {
   const [showLinksUteis, setShowLinksUteis] = useState(false);
+  const [student, setStudent] = useState<{
+    name: string;
+    academic_registry: string;
+    course: string;
+  } | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('http://192.168.100.150:3000/student/2')
+      .then(async (response) => {
+        if (!response.ok) throw new Error('Erro ao buscar dados');
+        const data = await response.json();
+        setStudent(data);
+      })
+      .catch(() => setError('Erro ao carregar dados do estudante'))
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <DrawerContentScrollView {...props} contentContainerStyle={styles.container}>
-      {/* Cabeçalho */}
       <View style={styles.header}>
         <View style={styles.avatar}>
           <Text style={styles.avatarText}>A</Text>
         </View>
-        <Text style={styles.userName}>MATHEUS HENRIQUE DE DEUS</Text>
-        <View style={{ flexDirection: 'row', gap: 20 }}>
-          <View style={styles.raContainer}>
-            <Text style={styles.raLabel}>REGISTRO ACADÊMICO:</Text>
-            <Text style={styles.raValue}>22007289</Text>
-          </View>
-          <TouchableOpacity
-            style={styles.logoutButton}
-            onPress={() => props.navigation.navigate('AuthPage')}
-          >
-            <Text style={styles.logoutText}>Sair</Text>
-          </TouchableOpacity>
-        </View>
+        {loading ? (
+          <Text style={styles.userName}>Carregando...</Text>
+        ) : error ? (
+          <Text style={styles.userName}>{error}</Text>
+        ) : student ? (
+          <>
+            <Text style={styles.userName}>{student.name}</Text>
+            <View style={{ flexDirection: 'row', gap: 20 }}>
+              <View style={styles.raContainer}>
+                <Text style={styles.raLabel}>REGISTRO ACADÊMICO:</Text>
+                <Text style={styles.raValue}>{student.academic_registry}</Text>
+              </View>
+              <TouchableOpacity
+                style={styles.logoutButton}
+                onPress={() => props.navigation.navigate('AuthPage')}
+              >
+                <Text style={styles.logoutText}>Sair</Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        ) : null}
       </View>
 
       <View style={styles.divider} />
 
-      {/* Itens padrão */}
       <DrawerItem
         label="Início"
         icon={() => <Icon name="home-outline" size={20} color="#014a8f" />}
@@ -73,7 +97,6 @@ export default function CustomDrawerContent(props: any) {
         onPress={() => props.navigation.navigate('Contacts')}
       />
 
-      {/* Links Úteis como DrawerItem + Chevron manual */}
       <View >
         <DrawerItem
           label="Links Úteis"

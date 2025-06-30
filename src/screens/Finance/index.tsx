@@ -21,7 +21,6 @@ if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental
 }
 
 export default function Finance() {
-  // Estado agora é um array de boletos
   const [finances, setFinances] = useState<Array<{
     name: string;
     reference: number;
@@ -38,15 +37,13 @@ export default function Finance() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Para controlar expansão de cada card
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch('http://192.168.100.53:3000/Finance/1')
+    fetch('http://192.168.100.150:3000/Finance/2')
       .then(async (response) => {
         if (!response.ok) throw new Error('Erro ao buscar dados financeiros');
         const data = await response.json();
-        // Corrige aqui: pega o objeto dentro de "finance"
         const financeData = data.finance;
         setFinances(Array.isArray(financeData) ? financeData : [financeData]);
       })
@@ -88,11 +85,9 @@ export default function Finance() {
               activeOpacity={0.9}
               onPress={() => toggleCard(idx)}
             >
-              {/* Cabeçalho do boleto */}
               <View style={styles.cardHeader}>
                 <View style={{ flex: 1 }}>
                   <Text style={styles.boletoCardTitle}>{finance.name}</Text>
-                  {/* Substitua pelo nome do aluno e curso se necessário */}
                   <Text style={styles.boletoInfo}>Aluno(a)</Text>
                   <Text style={styles.boletoInfo}>Curso: -</Text>
                   <Text style={styles.boletoValor}>R$ {(finance.value ?? 0).toFixed(2)}</Text>
@@ -101,7 +96,6 @@ export default function Finance() {
                 {expandedIndex === idx ? <ArrowTop width={20} height={20} /> : <ArrowBottom width={20} height={20} />}
               </View>
 
-              {/* Corpo expandido */}
               {expandedIndex === idx && (
                 <View>
                   <View style={styles.boletoBadge}>

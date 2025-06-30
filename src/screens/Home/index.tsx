@@ -41,7 +41,7 @@ export default function Home() {
 
 
   useEffect(() => {
-    fetch('http://192.168.100.53:3000/student/1')
+    fetch('http://192.168.100.150:3000/student/2')
       .then(async (response) => {
         if (!response.ok) throw new Error('Erro ao buscar dados');
         const data = await response.json();
@@ -52,7 +52,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    fetch('http://192.168.100.53:3000/discipline/1')
+    fetch('http://192.168.100.150:3000/discipline/2')
       .then(async (response) => {
         if (!response.ok) throw new Error('Erro ao buscar disciplinas');
         const data = await response.json();
@@ -162,11 +162,15 @@ export default function Home() {
           <Text style={styles.sectionTitle}>Horários</Text>
           <View style={styles.timeSlot}>
             <View style={styles.circle}></View>
-            <Text style={styles.timeText}>Orientação de Estágio I - 18:50 - 19:40</Text>
+            <Text style={styles.timeText}>Desenvolvimento Web II - 18:50 - 19:40</Text>
           </View>
           <View style={styles.timeSlot}>
             <View style={styles.circle}></View>
-            <Text style={styles.timeText}>Orientação de Estágio I - 19:40 - 20:30</Text>
+            <Text style={styles.timeText}>Desenvolvimento Web II - 19:40 - 20:30</Text>
+          </View>
+          <View style={styles.timeSlot}>
+            <View style={styles.circle}></View>
+            <Text style={styles.timeText}>Orientação de Estágio I - 20:30 - 21:20</Text>
           </View>
           <View style={styles.timeSlot}>
             <View style={styles.circle}></View>

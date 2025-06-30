@@ -27,7 +27,7 @@ export default function AuthPage() {
       return;
     }
 
-    fetch("http://192.168.100.53:3000/student/login", {
+    fetch("http://192.168.100.150:3000/student/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
