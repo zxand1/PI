@@ -1,6 +1,5 @@
-
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LayoutAnimation, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -64,6 +63,26 @@ export default function Home() {
 
   const [expandedDisciplina, setExpandedDisciplina] = useState<number | null>(null);
 
+  const [student, setStudent] = useState<{
+    name: string;
+    academic_registry: string;
+    course: string;
+  } | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+
+  useEffect(() => {
+    fetch('http://192.168.100.150:3000/student/1')
+      .then(async (response) => {
+        if (!response.ok) throw new Error('Erro ao buscar dados');
+        const data = await response.json();
+        setStudent(data);
+      })
+      .catch(() => setError('Erro ao carregar dados do estudante'))
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar translucent />
@@ -71,9 +90,17 @@ export default function Home() {
 
       <ScrollView contentContainerStyle={styles.container2}>
         <View style={styles.header}>
-          <Text style={styles.greeting}>Olá, MATHEUS HENRIQUE DE DEUS</Text>
-          <Text style={styles.registro}>REGISTRO ACADÊMICO: 22007228</Text>
-          <Text style={styles.sistema}>SISTEMAS DE INFORMAÇÃO</Text>
+          {loading ? (
+            <Text style={styles.greeting}>Carregando...</Text>
+          ) : error ? (
+            <Text style={styles.greeting}>{error}</Text>
+          ) : student ? (
+            <>
+              <Text style={styles.greeting}>Olá, {student.name}</Text>
+              <Text style={styles.registro}>REGISTRO ACADÊMICO: {student.academic_registry}</Text>
+              <Text style={styles.sistema}>{student.course}</Text>
+            </>
+          ) : null}
         </View>
 
         <View style={styles.cardContainer}>
@@ -192,8 +219,8 @@ export default function Home() {
 
         <Text style={styles.sectionTitle}>Atividades</Text>
         <View style={styles.section2}>
-          <TouchableOpacity 
-            style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%'}}
+          <TouchableOpacity
+            style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}
             onPress={() => navigation.navigate('Actividy')}>
             <Text style={styles.activity}>Atividade Avaliativa - 07/04/2025 -</Text>
             <Text style={styles.pendente}>Pendente</Text>
@@ -203,3 +230,4 @@ export default function Home() {
     </SafeAreaView>
   );
 };
+
