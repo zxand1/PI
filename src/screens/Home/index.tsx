@@ -25,41 +25,11 @@ export default function Home() {
 
   const [selectedDate, setSelectedDate] = useState<string>(formattedDate);
 
-  const disciplinas = [
-    'DESENVOLVIMENTO DE SISTEMAS DE INFORMAÇÃO AVANÇADOS II',
-    'ECONOMIA',
-    'ESTÁGIO SUPERVISIONADO I',
-    'PROJETO INTEGRADOR VII',
-  ];
-
-  const detalhes = [
-    {
-      Professor: 'Rafael Marinho e Silva',
-      Email: 'rafaelmarinho@unipam.edu.br',
-    },
-    {
-      Professor: 'Heitor Cunha Barros',
-      Email: 'heitorcb@unipam.edu.br'
-    },
-    {
-      Professor: 'Henaldo Barros Moraes',
-      Professor2: 'Adriene Sttéfane Silva',
-      Email: 'henaldo@unipam.edu.br',
-      Email2: 'sttefane@unipam.edu.br'
-    },
-    {
-      Professor: 'Eder Manoeal de Santana',
-      Email: 'eder@unipam.edu.br'
-    },
-    {
-      Professor: 'Juliana Lilis da Silva',
-      Email: 'juliana@unipam.edu.br'
-    },
-    {
-      Professor: 'Alexandre Henrick da Silva Alves',
-      Email: 'alexandrehs@unipam.edu.br'
-    },
-  ]
+  const [disciplines, setDisciplines] = useState<
+    { id: number; name: string; teacher: string; teacherEmail: string }[]
+  >([]);
+  const [ loadingDisciplines, setLoadingDisciplines ] = useState<boolean>(true);
+  const [ errorDisciplines, setErrorDisciplines ] = useState<string | null>(null);
 
   const [expandedDisciplina, setExpandedDisciplina] = useState<number | null>(null);
 
@@ -73,7 +43,7 @@ export default function Home() {
 
 
   useEffect(() => {
-    fetch('http://192.168.100.150:3000/student/1')
+    fetch('http://192.168.100.150:3000/student/2')
       .then(async (response) => {
         if (!response.ok) throw new Error('Erro ao buscar dados');
         const data = await response.json();
@@ -81,6 +51,17 @@ export default function Home() {
       })
       .catch(() => setError('Erro ao carregar dados do estudante'))
       .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    fetch('http://192.168.100.150:3000/discipline/2')
+      .then(async (response) => {
+        if (!response.ok) throw new Error('Erro ao buscar disciplinas');
+        const data = await response.json();
+        setDisciplines(Array.isArray(data.discipline) ? data.discipline : [data.discipline]);
+      })
+      .catch(() => setErrorDisciplines('Erro ao carregar disciplinas'))
+      .finally(() => setLoadingDisciplines(false));
   }, []);
 
   return (
@@ -120,48 +101,32 @@ export default function Home() {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Disciplinas</Text>
-          {disciplinas.map((disciplina, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.buttonDisciplina}
-              onPress={() => {
-                setExpandedDisciplina(expandedDisciplina === index ? null : index);
-              }}
-            >
-              <Text style={styles.item}>{disciplina}</Text>
-              {expandedDisciplina === index && (
-                <View style={styles.item}>
-                  {detalhes[index].Professor && (
-                    <>
-                      <Text style={styles.itemDetalhe}>Professor: {detalhes[index].Professor}</Text>
-                      {(detalhes[index].Email || detalhes[index].Professor2 || detalhes[index].Email2) && (
-                        <View style={styles.separator} />
-                      )}
-                    </>
-                  )}
-
-                  {detalhes[index].Email && (
-                    <>
-                      <Text style={styles.itemDetalhe}>Email: {detalhes[index].Email}</Text>
-                    </>
-                  )}
-                  {detalhes[index].Professor2 && (
-                    <>
-                      <View style={styles.separator} />
-                      <Text style={styles.itemDetalhe}>Professor: {detalhes[index].Professor2}</Text>
-                      <View style={styles.separator} />
-                    </>
-                  )}
-                  {detalhes[index].Email2 && (
-                    <>
-                      <Text style={styles.itemDetalhe}>Email: {detalhes[index].Email2}</Text>
-                      <View style={styles.separator} />
-                    </>
-                  )}
-                </View>
-              )}
-            </TouchableOpacity>
-          ))}
+          {loadingDisciplines ? (
+            <Text style={styles.item}>Carregando...</Text>
+          ) : errorDisciplines ? (
+            <Text style={styles.item}>{errorDisciplines}</Text>
+          ) : disciplines.length === 0 ? (
+            <Text style={styles.item}>Nenhuma disciplina encontrada.</Text>
+          ) : (
+            disciplines.map((disciplina, index) => (
+              <TouchableOpacity
+                key={disciplina.id}
+                style={styles.buttonDisciplina}
+                onPress={() => {
+                  setExpandedDisciplina(expandedDisciplina === index ? null : index);
+                }}
+              >
+                <Text style={styles.item}>{disciplina.name}</Text>
+                {expandedDisciplina === index && (
+                  <View style={styles.item}>
+                    <Text style={styles.itemDetalhe}>Professor: {disciplina.teacher}</Text>
+                    <View style={styles.separator} />
+                    <Text style={styles.itemDetalhe}>Email: {disciplina.teacherEmail}</Text>
+                  </View>
+                )}
+              </TouchableOpacity>
+            ))
+          )}
         </View>
 
         <View style={styles.section}>
