@@ -3,7 +3,7 @@ import ArrowTop from "@/assets/arrowTop.svg";
 import PrinterIcon from "@/assets/printer-svgrepo-com.svg";
 import { Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Platform,
   ScrollView,
@@ -20,25 +20,42 @@ if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-interface PaymentInfo {
-  title: string;
-  amount: number;
-  dueDate: string;
-  isPaid: boolean;
-}
-
-const paymentData: PaymentInfo = {
-  title: "Mens. Graduação Ref. Parc. No.5",
-  amount: 1365.0,
-  dueDate: "12/05/2025",
-  isPaid: false,
-};
-
 export default function Finance() {
-  const [expanded, setExpanded] = useState<boolean>(false);
+  // Estado agora é um array de boletos
+  const [finances, setFinances] = useState<Array<{
+    name: string;
+    reference: number;
+    emission_date: string;
+    due_date: string;
+    value: number;
+    interest: number;
+    fine: number;
+    discount: number;
+    scholarship_value: number;
+    paid_value: number;
+    status: string;
+  }>>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  function toggleCard() {
-    setExpanded(!expanded);
+  // Para controlar expansão de cada card
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch('http://192.168.100.53:3000/Finance/1')
+      .then(async (response) => {
+        if (!response.ok) throw new Error('Erro ao buscar dados financeiros');
+        const data = await response.json();
+        // Corrige aqui: pega o objeto dentro de "finance"
+        const financeData = data.finance;
+        setFinances(Array.isArray(financeData) ? financeData : [financeData]);
+      })
+      .catch(() => setError('Erro ao carregar dados financeiros'))
+      .finally(() => setLoading(false));
+  }, []);
+
+  function toggleCard(idx: number) {
+    setExpandedIndex(expandedIndex === idx ? null : idx);
   }
 
   return (
@@ -52,74 +69,100 @@ export default function Finance() {
 
         <View style={styles.contentWarningTitle}>
           <Text style={styles.contentWarning}>
-          <Ionicons name="information-circle-outline" size={20} color="#003366" />
+            <Ionicons name="information-circle-outline" size={20} color="#003366" />
             Antes de realizar o pagamento, certifique-se de que o nome presente no boleto pertença à FEPAM - FUND EDUC DE PATOS DE MINAS.
           </Text>
         </View>
 
-        <TouchableOpacity
-          style={styles.boletoCard}
-          activeOpacity={0.9}
-          onPress={toggleCard}
-        >
-          {/* Cabeçalho do boleto */}
-          <View style={styles.cardHeader}>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.boletoCardTitle}>{paymentData.title} Aluno(a)</Text>
-              <Text style={styles.boletoInfo}>ALEXANDRE DE OLIVEIRA PINHEIRO</Text>
-              <Text style={styles.boletoInfo}>Curso: SISTEMAS DE INFORMAÇÃO</Text>
-              <Text style={styles.boletoValor}>R$ {paymentData.amount.toFixed(2)}</Text>
-              <Text style={styles.boletoVencimento}>Vence em {paymentData.dueDate}</Text>
-            </View>
-            {expanded ? <ArrowTop width={20} height={20} /> : <ArrowBottom width={20} height={20} />}
-          </View>
-
-          {/* Corpo expandido */}
-          {expanded && (
-            <View>
-              <View style={styles.boletoBadge}>
-                <Text style={styles.boletoBadgeText}>Mensalidade</Text>
+        {loading ? (
+          <Text style={{ textAlign: 'center', marginTop: 20 }}>Carregando...</Text>
+        ) : error ? (
+          <Text style={{ textAlign: 'center', marginTop: 20 }}>{error}</Text>
+        ) : finances.length === 0 ? (
+          <Text style={{ textAlign: 'center', marginTop: 20 }}>Nenhum boleto encontrado.</Text>
+        ) : (
+          finances.map((finance, idx) => (
+            <TouchableOpacity
+              key={finance.reference ?? idx}
+              style={styles.boletoCard}
+              activeOpacity={0.9}
+              onPress={() => toggleCard(idx)}
+            >
+              {/* Cabeçalho do boleto */}
+              <View style={styles.cardHeader}>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.boletoCardTitle}>{finance.name}</Text>
+                  {/* Substitua pelo nome do aluno e curso se necessário */}
+                  <Text style={styles.boletoInfo}>Aluno(a)</Text>
+                  <Text style={styles.boletoInfo}>Curso: -</Text>
+                  <Text style={styles.boletoValor}>R$ {(finance.value ?? 0).toFixed(2)}</Text>
+                  <Text style={styles.boletoVencimento}>Vence em {finance.due_date ? new Date(finance.due_date).toLocaleDateString() : '-'}</Text>
+                </View>
+                {expandedIndex === idx ? <ArrowTop width={20} height={20} /> : <ArrowBottom width={20} height={20} />}
               </View>
 
-              <View style={styles.boletoActions}>
-                <PrinterIcon width={22} height={22} />
-                <TouchableOpacity style={styles.boletoButtonDisabled} disabled>
-                  <Text style={styles.boletoButtonDisabledText}>Realizar pagamento</Text>
-                </TouchableOpacity>
-              </View>
+              {/* Corpo expandido */}
+              {expandedIndex === idx && (
+                <View>
+                  <View style={styles.boletoBadge}>
+                    <Text style={styles.boletoBadgeText}>Mensalidade</Text>
+                  </View>
 
-              <View style={styles.boletoDetailsRow}>
-                <View style={styles.boletoDetailsItem}>
-                  <Text style={styles.boletoDetailsLabel}>Referência</Text>
-                  <Text style={styles.boletoDetailsValue}>3876360</Text>
-                </View>
-                <View style={styles.boletoDetailsItem}>
-                  <Text style={styles.boletoDetailsLabel}>Período</Text>
-                  <Text style={styles.boletoDetailsValue}>1/2025</Text>
-                </View>
-                <View style={styles.boletoDetailsItem}>
-                  <Text style={styles.boletoDetailsLabel}>Emitido em</Text>
-                  <Text style={styles.boletoDetailsValue}>27/12/2024</Text>
-                </View>
-              </View>
+                  <View style={styles.boletoActions}>
+                    <PrinterIcon width={22} height={22} />
+                    <TouchableOpacity style={styles.boletoButtonDisabled} disabled>
+                      <Text style={styles.boletoButtonDisabledText}>Realizar pagamento</Text>
+                    </TouchableOpacity>
+                  </View>
 
-              <View style={styles.boletoDetailsRow}>
-                <View style={styles.boletoDetailsItem}>
-                  <Text style={styles.boletoDetailsLabel}>Valor Original</Text>
-                  <Text style={styles.boletoDetailsValue}>R$ 1.365,00</Text>
+                  <View style={styles.boletoDetailsRow}>
+                    <View style={styles.boletoDetailsItem}>
+                      <Text style={styles.boletoDetailsLabel}>Referência</Text>
+                      <Text style={styles.boletoDetailsValue}>{finance.reference}</Text>
+                    </View>
+                    <View style={styles.boletoDetailsItem}>
+                      <Text style={styles.boletoDetailsLabel}>Período</Text>
+                      <Text style={styles.boletoDetailsValue}>
+                        {finance.due_date ? `${new Date(finance.due_date).getMonth() + 1}/${new Date(finance.due_date).getFullYear()}` : '-'}
+                      </Text>
+                    </View>
+                    <View style={styles.boletoDetailsItem}>
+                      <Text style={styles.boletoDetailsLabel}>Emitido em</Text>
+                      <Text style={styles.boletoDetailsValue}>
+                        {finance.emission_date ? new Date(finance.emission_date).toLocaleDateString() : '-'}
+                      </Text>
+                    </View>
+                  </View>
+
+                  <View style={styles.boletoDetailsRow}>
+                    <View style={styles.boletoDetailsItem}>
+                      <Text style={styles.boletoDetailsLabel}>Valor Original</Text>
+                      <Text style={styles.boletoDetailsValue}>R$ {(finance.value ?? 0).toFixed(2)}</Text>
+                    </View>
+                    <View style={styles.boletoDetailsItem}>
+                      <Text style={styles.boletoDetailsLabel}>Valor Desconto</Text>
+                      <Text style={styles.boletoDetailsValue}>R$ {(finance.discount ?? 0).toFixed(2)}</Text>
+                    </View>
+                    <View style={styles.boletoDetailsItem}>
+                      <Text style={styles.boletoDetailsLabel}>Valor Pago</Text>
+                      <Text style={styles.boletoDetailsValue}>R$ {(finance.paid_value ?? 0).toFixed(2)}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.boletoDetailsRow}>
+                    <View style={styles.boletoDetailsItem}>
+                      <Text style={styles.boletoDetailsLabel}>Bolsa</Text>
+                      <Text style={styles.boletoDetailsValue}>R$ {(finance.scholarship_value ?? 0).toFixed(2)}</Text>
+                    </View>
+                    <View style={styles.boletoDetailsItem}>
+                      <Text style={styles.boletoDetailsLabel}>Status</Text>
+                      <Text style={styles.boletoDetailsValue}>{finance.status}</Text>
+                    </View>
+                  </View>
                 </View>
-                <View style={styles.boletoDetailsItem}>
-                  <Text style={styles.boletoDetailsLabel}>Valor Desconto</Text>
-                  <Text style={styles.boletoDetailsValue}>R$ 0,00</Text>
-                </View>
-                <View style={styles.boletoDetailsItem}>
-                  <Text style={styles.boletoDetailsLabel}>Valor Pago</Text>
-                  <Text style={styles.boletoDetailsValue}>R$ 0,00</Text>
-                </View>
-              </View>
-            </View>
-          )}
-        </TouchableOpacity>
+              )}
+            </TouchableOpacity>
+          ))
+        )}
       </ScrollView>
     </SafeAreaView>
   );

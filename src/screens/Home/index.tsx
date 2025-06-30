@@ -41,7 +41,7 @@ export default function Home() {
 
 
   useEffect(() => {
-    fetch('http://192.168.100.150:3000/student/2')
+    fetch('http://192.168.100.53:3000/student/1')
       .then(async (response) => {
         if (!response.ok) throw new Error('Erro ao buscar dados');
         const data = await response.json();
@@ -52,7 +52,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    fetch('http://192.168.100.150:3000/discipline/2')
+    fetch('http://192.168.100.53:3000/discipline/1')
       .then(async (response) => {
         if (!response.ok) throw new Error('Erro ao buscar disciplinas');
         const data = await response.json();
