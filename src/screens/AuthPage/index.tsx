@@ -14,10 +14,10 @@ export default function AuthPage() {
   useFocusEffect(
     useCallback(() => {
       setTimeout(() => {
-      setUsername('');
-      setPassword('');
-      setShowPassword(false);
-    }, 100);
+        setUsername('');
+        setPassword('');
+        setShowPassword(false);
+      }, 100);
     }, [])
   )
 
@@ -26,12 +26,27 @@ export default function AuthPage() {
       Alert.alert("Campos obrigatórios", "Preencha usuário e senha");
       return;
     }
-    
-    if (username === "admin" && password === "1234") {
-      navigation.navigate("Drawer");
-    } else {
-      alert("Usuário ou senha inválidos");
-    }
+
+    fetch("http://192.168.100.150:3000/student/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username, password })
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          const error = await response.json().catch(() => ({}));
+          throw new Error(error.message || "Usuário ou senha inválidos");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        navigation.navigate("Drawer");
+      })
+      .catch((error) => {
+        Alert.alert("Erro de login", error.message);
+      });
   }
 
   return (
