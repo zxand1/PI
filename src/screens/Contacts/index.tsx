@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, ScrollView, StatusBar as RNStatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import styles from './style'; // mesmo style que você forneceu
+import styles from './style';
 import Header from '../../components/Header';
 const contatosMockados = [
   {
@@ -54,11 +54,6 @@ export default function Contacts() {
   <SafeAreaView style={styles.container}>
       <RNStatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
       <Header />
-        <View style={styles.header}>
-          <Text style={styles.greeting}>Olá, MATHEUS HENRIQUE DE DEUS</Text>
-          <Text style={styles.registro}>REGISTRO ACADÊMICO: 22007228</Text>
-          <Text style={styles.sistema}>SISTEMAS DE INFORMAÇÃO</Text>
-        </View>
 
       <ScrollView style={styles.content} overScrollMode="never">
         <View style={styles.contentHeader}>

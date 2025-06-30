@@ -190,7 +190,6 @@ export default function Home() {
           </View>
         </View>
 
-
         <Text style={styles.sectionTitle}>Atividades</Text>
         <View style={styles.section2}>
           <TouchableOpacity 

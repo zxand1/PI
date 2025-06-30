@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    color: '#000',
+    color: "#000",
     fontSize: 24,
   },
   header: {
@@ -107,6 +107,14 @@ const styles = StyleSheet.create({
   legendaTexto: {
     fontSize: 14,
     color: '#333',
+  },
+  contentHeader: {
+    width: "100%",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 20,
   },
 });
 
