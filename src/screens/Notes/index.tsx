@@ -50,7 +50,7 @@ const subjects: SubjectNote[] = [
   },
   {
     name: "Projeto Integrador VII",
-    evaluations: [{ title: "Trabalho", score: 0, maxScore: 20, date: "15/03/2025" }],
+    evaluations: [{ title: "Trabalho", score: 19.5, maxScore: 20, date: "15/03/2025" }],
   },
   {
     name: "Tópicos Especiais II",

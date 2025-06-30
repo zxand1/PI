@@ -12,9 +12,9 @@ import * as Linking from 'expo-linking';
 import * as Sharing from 'expo-sharing';
 
 const DATA = [
-    { id: '1', disciplina: 'Matemática', situacao: 'Em andamento', participacao: 'Sim' },
-    { id: '2', disciplina: 'História', situacao: 'Finalizada', participacao: 'Não' },
-    { id: '3', disciplina: 'Português', situacao: 'Em andamento', participacao: 'Sim' },
+    { id: '1', disciplina: 'Sistemas Aplicados', situacao: 'Em andamento', participacao: 'Sim' },
+    { id: '2', disciplina: 'Banco de Dados', situacao: 'Finalizada', participacao: 'Não' },
+    { id: '3', disciplina: 'Tópicos Especiais', situacao: 'Em andamento', participacao: 'Sim' },
 ];
 
 export default function Actividy() {
