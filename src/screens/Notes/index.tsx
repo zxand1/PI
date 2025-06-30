@@ -179,7 +179,21 @@ export default function Notes() {
             );
           })}
         </View>
+        <View style={{ paddingHorizontal: 20, paddingBottom: 30, paddingTop: 10 }}>
+          <LegendItem color="#43d19e" label="Nota igual ou superior a 70%" />
+          <LegendItem color="#4f8cff" label="Nota entre 40% e 69%" />
+          <LegendItem color="#ff7a59" label="Nota inferior a 40%" />
+        </View>
       </ScrollView>
     </SafeAreaView>
+  );
+}
+
+function LegendItem({ color, label }: { color: string; label: string }) {
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
+      <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: color, marginRight: 8 }} />
+      <Text style={{ fontSize: 14, color: '#003366', fontWeight: '500' }}>{label}</Text>
+    </View>
   );
 }

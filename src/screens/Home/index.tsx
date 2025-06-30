@@ -1,14 +1,12 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { LayoutAnimation, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/Header';
-import styles from './styles';
-import Actividy from '../Actividy';
-import { useNavigation } from '@react-navigation/native';
-import { NavigationProp } from '@react-navigation/native';
 import { propsNavigationStack } from '../../route/Models';
+import styles from './styles';
 
 interface Calendar {
   dateString: string;
@@ -28,8 +26,8 @@ export default function Home() {
   const [disciplines, setDisciplines] = useState<
     { id: number; name: string; teacher: string; teacherEmail: string }[]
   >([]);
-  const [ loadingDisciplines, setLoadingDisciplines ] = useState<boolean>(true);
-  const [ errorDisciplines, setErrorDisciplines ] = useState<string | null>(null);
+  const [loadingDisciplines, setLoadingDisciplines] = useState<boolean>(true);
+  const [errorDisciplines, setErrorDisciplines] = useState<string | null>(null);
 
   const [expandedDisciplina, setExpandedDisciplina] = useState<number | null>(null);
 
@@ -58,7 +56,7 @@ export default function Home() {
       .then(async (response) => {
         if (!response.ok) throw new Error('Erro ao buscar disciplinas');
         const data = await response.json();
-        setDisciplines(Array.isArray(data.discipline) ? data.discipline : [data.discipline]);
+        setDisciplines(Array.isArray(data) ? data : []);
       })
       .catch(() => setErrorDisciplines('Erro ao carregar disciplinas'))
       .finally(() => setLoadingDisciplines(false));
@@ -68,7 +66,6 @@ export default function Home() {
     <SafeAreaView style={styles.container}>
       <StatusBar translucent />
       <Header />
-
       <ScrollView contentContainerStyle={styles.container2}>
         <View style={styles.header}>
           {loading ? (
@@ -83,22 +80,20 @@ export default function Home() {
             </>
           ) : null}
         </View>
-
         <View style={styles.cardContainer}>
           <View style={styles.card}>
-            <Text style={styles.cardTitle}>Atividades Enviadas</Text>
+            <Text style={styles.cardTitle}>Atividades{"\nenviadas:"}</Text>
             <Text style={styles.cardValue}>16</Text>
           </View>
           <View style={styles.card2}>
-            <Text style={styles.cardTitle}>Atividades Para Enviar</Text>
+            <Text style={styles.cardTitle}>Atividades{"\npara enviar:"}</Text>
             <Text style={styles.cardValue}>1</Text>
           </View>
           <View style={styles.card3}>
-            <Text style={styles.cardTitle}>Pesquisas Disponíveis</Text>
+            <Text style={styles.cardTitle}>Pesquisas{"\ndisponíveis:"}</Text>
             <Text style={styles.cardValue}>0</Text>
           </View>
         </View>
-
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Disciplinas</Text>
           {loadingDisciplines ? (
@@ -108,31 +103,29 @@ export default function Home() {
           ) : disciplines.length === 0 ? (
             <Text style={styles.item}>Nenhuma disciplina encontrada.</Text>
           ) : (
-            disciplines.map((disciplina, index) => (
+            disciplines.map((item, index) => (
               <TouchableOpacity
-                key={disciplina.id}
+                key={item.id}
                 style={styles.buttonDisciplina}
                 onPress={() => {
                   setExpandedDisciplina(expandedDisciplina === index ? null : index);
                 }}
               >
-                <Text style={styles.item}>{disciplina.name}</Text>
+                <Text style={styles.item}>{item.name}</Text>
                 {expandedDisciplina === index && (
                   <View style={styles.item}>
-                    <Text style={styles.itemDetalhe}>Professor: {disciplina.teacher}</Text>
+                    <Text style={styles.itemDetalhe}>Professor: {item.teacher}</Text>
                     <View style={styles.separator} />
-                    <Text style={styles.itemDetalhe}>Email: {disciplina.teacherEmail}</Text>
+                    <Text style={styles.itemDetalhe}>Email: {item.teacherEmail}</Text>
                   </View>
                 )}
               </TouchableOpacity>
             ))
           )}
         </View>
-
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Calendário</Text>
           <Text style={styles.date}>Abril - 2025</Text>
-
           <Calendar
             current={selectedDate}
             markedDates={{
@@ -165,7 +158,6 @@ export default function Home() {
             }}
           />
         </View>
-
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Horários</Text>
           <View style={styles.timeSlot}>
@@ -181,11 +173,10 @@ export default function Home() {
             <Text style={styles.timeText}>Orientação de Estágio I - 20:30 - 21:20</Text>
           </View>
         </View>
-
         <Text style={styles.sectionTitle}>Atividades</Text>
         <View style={styles.section2}>
           <TouchableOpacity
-            style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}
+            style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%', margin: 10, }}
             onPress={() => navigation.navigate('Actividy')}>
             <Text style={styles.activity}>Atividade Avaliativa - 07/04/2025 -</Text>
             <Text style={styles.pendente}>Pendente</Text>

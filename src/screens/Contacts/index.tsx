@@ -51,7 +51,7 @@ const contatosMockados = [
 
 export default function Contacts() {
   return (
-  <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <RNStatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
       <Header />
 

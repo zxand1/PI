@@ -1,17 +1,14 @@
-import Logo from "@/assets/logoWhite.svg";
-import Menu from "@/assets/menu.svg";
-import ArrowBottom from "@/assets/arrowBottom.svg";
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import * as FileSystem from "expo-file-system";
+import * as Sharing from "expo-sharing";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Header from "../../components/Header";
 import { propStack } from "../../route/Models";
 import styles from "./styles";
-import { Ionicons } from "@expo/vector-icons";
-import Header from "../../components/Header";
-import * as Sharing from "expo-sharing";
-import * as FileSystem from "expo-file-system";
 
 export default function Materials() {
   const navigation = useNavigation<propStack>();
@@ -62,31 +59,31 @@ export default function Materials() {
     : materiais;
 
   async function handleDownload(nome: string) {
-  const url = arquivos[nome];
-  if (!url) {
-    alert("Arquivo não encontrado.");
-    return;
-  }
-  const fileUri = FileSystem.documentDirectory + nome.replace(/\s+/g, "_") + ".pdf";
-  try {
-    const downloadResumable = FileSystem.createDownloadResumable(
-      url,
-      fileUri
-    );
-    const result = await downloadResumable.downloadAsync();
-    if (result && result.uri) {
-      if (await Sharing.isAvailableAsync()) {
-        await Sharing.shareAsync(result.uri);
-      } else {
-        alert(`Arquivo salvo em: ${result.uri}`);
-      }
-    } else {
-      alert("Falha ao baixar o arquivo.");
+    const url = arquivos[nome];
+    if (!url) {
+      alert("Arquivo não encontrado.");
+      return;
     }
-  } catch (e) {
-    alert("Erro ao baixar o arquivo.");
+    const fileUri = FileSystem.documentDirectory + nome.replace(/\s+/g, "_") + ".pdf";
+    try {
+      const downloadResumable = FileSystem.createDownloadResumable(
+        url,
+        fileUri
+      );
+      const result = await downloadResumable.downloadAsync();
+      if (result && result.uri) {
+        if (await Sharing.isAvailableAsync()) {
+          await Sharing.shareAsync(result.uri);
+        } else {
+          alert(`Arquivo salvo em: ${result.uri}`);
+        }
+      } else {
+        alert("Falha ao baixar o arquivo.");
+      }
+    } catch (e) {
+      alert("Erro ao baixar o arquivo.");
+    }
   }
-}
 
 
 

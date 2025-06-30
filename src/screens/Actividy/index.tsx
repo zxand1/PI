@@ -1,15 +1,14 @@
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
+import * as DocumentPicker from 'expo-document-picker';
+import * as FileSystem from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
 import React, { useState } from 'react';
-import { FlatList, Text, TouchableOpacity, View, Button, Platform } from 'react-native';
+import { Button, FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/Header';
 import { propStack } from '../../route/Models';
 import styles from './styles';
-import * as DocumentPicker from 'expo-document-picker';
-import * as FileSystem from 'expo-file-system';
-import * as Linking from 'expo-linking';
-import * as Sharing from 'expo-sharing';
 
 const DATA = [
     { id: '1', disciplina: 'Sistemas Aplicados', situacao: 'Em andamento', participacao: 'Sim' },
@@ -45,30 +44,30 @@ export default function Actividy() {
             setParticipacao("Sim");
             alert(`Arquivo selecionado: ${result.assets[0].name}`);
         }
-        else{
+        else {
             setSelectedFile(null);
             setParticipacao("Nao");
         }
     }
 
     const handleDownloadFile = async () => {
-    if (selectedFile && selectedFile.uri) {
-        try {
-            const destPath = FileSystem.documentDirectory + selectedFile.name;
-            await FileSystem.copyAsync({
-                from: selectedFile.uri,
-                to: destPath,
-            });
-            if (await Sharing.isAvailableAsync()) {
-                await Sharing.shareAsync(destPath);
-            } else {
-                alert('Compartilhamento não disponível neste dispositivo.');
+        if (selectedFile && selectedFile.uri) {
+            try {
+                const destPath = FileSystem.documentDirectory + selectedFile.name;
+                await FileSystem.copyAsync({
+                    from: selectedFile.uri,
+                    to: destPath,
+                });
+                if (await Sharing.isAvailableAsync()) {
+                    await Sharing.shareAsync(destPath);
+                } else {
+                    alert('Compartilhamento não disponível neste dispositivo.');
+                }
+            } catch (error) {
+                alert('Não foi possível abrir o arquivo.');
             }
-        } catch (error) {
-            alert('Não foi possível abrir o arquivo.');
         }
-    }
-};
+    };
 
     return (
         <SafeAreaView style={styles.container}>

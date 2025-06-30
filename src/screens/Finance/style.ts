@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#f6f8fa',
   },
   content: {
     flex: 1,
@@ -16,66 +17,48 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   title: {
-    color: "#000",
+    color: "#003366",
     fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   contentWarningTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
     color: "#003366",
     margin: 20,
-    padding: 20,
+    padding: 16,
     borderColor: "#003366",
     borderWidth: 1,
-    borderRadius: 10,
-    alignItems: "center"
+    borderRadius: 12,
+    backgroundColor: "#fff",
+    textAlign: "left",
   },
   contentWarning: {
-    fontWeight: "regular",
+    fontWeight: "normal",
     fontSize: 15,
+    color: "#003366",
   },
   cards: {
     flex: 1,
-    padding: 20,
-    gap: 15,
+    padding: 16,
+    gap: 18,
   },
   cardsContainer: {
-    height: 60,
-    borderColor: "#2c3131",
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 20,
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 18,
+    marginBottom: 10,
+    elevation: 3,
+    shadowColor: '#003366',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.10,
+    shadowRadius: 6,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     gap: 10,
   },
-  cardsTitle: {
-    fontSize: 14,
-    fontWeight: "bold",
-    width: 250,
-  },
-  cardsNotesApproved: {
-    paddingHorizontal: 7,
-    paddingVertical: 2,
-    backgroundColor: "#6fc872cc",
-    borderRadius: 20,
-    color: "white"
-  },
-  cardsNotesReproved: {
-    paddingHorizontal: 7,
-    paddingVertical: 2,
-    backgroundColor: "#ff5c5ccc",
-    borderRadius: 20,
-    color: "white"
-  },
-  cardsNotesDefault: {
-    paddingHorizontal: 7,
-    paddingVertical: 2,
-    backgroundColor: "#334c7d",
-    borderRadius: 20,
-    color: "white"
-  },  
   cardHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -83,17 +66,23 @@ const styles = StyleSheet.create({
   },
   boletoCard: {
     backgroundColor: "#fff",
-    borderRadius: 20,
+    borderRadius: 16,
     padding: 20,
     borderWidth: 1,
     borderColor: "#ccc",
     marginHorizontal: 20,
+    marginBottom: 20,
+    elevation: 3,
+    shadowColor: '#003366',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.10,
+    shadowRadius: 6,
     gap: 10,
   },
   boletoCardTitle: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#000",
+    color: "#003366",
   },
   boletoInfo: {
     fontSize: 14,
@@ -103,10 +92,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "#e59200",
     fontWeight: "bold",
+    marginTop: 8,
   },
   boletoVencimento: {
     fontSize: 14,
     color: "#666",
+    marginBottom: 8,
   },
   boletoBadge: {
     alignSelf: "flex-start",
@@ -114,10 +105,13 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     backgroundColor: "#263fa3",
     borderRadius: 20,
+    marginTop: 10,
+    marginBottom: 10,
   },
   boletoBadgeText: {
     color: "#fff",
     fontSize: 12,
+    fontWeight: 'bold',
   },
   boletoActions: {
     flexDirection: "row",
@@ -151,9 +145,8 @@ const styles = StyleSheet.create({
   boletoDetailsValue: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#000",
+    color: "#003366",
   },
-
 });
 
 export default styles;
