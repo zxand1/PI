@@ -29,7 +29,7 @@ export default function Notes() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://192.168.100.150:3000/discipline/2")
+    fetch("http://192.168.100.45:3000/discipline/2")
       .then((res) => res.json())
       .then((data) => {
         setSubjects(
@@ -39,7 +39,7 @@ export default function Notes() {
           }))
         );
       });
-    fetch("http://192.168.100.150:3000/note/2")
+    fetch("http://192.168.100.45:3000/note/2")
       .then((res) => res.json())
       .then((data) => {
         setNotes(data);

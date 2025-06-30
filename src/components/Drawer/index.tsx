@@ -20,7 +20,7 @@ export default function CustomDrawerContent(props: any) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('http://192.168.100.150:3000/student/2')
+    fetch('http://192.168.100.45:3000/student/2')
       .then(async (response) => {
         if (!response.ok) throw new Error('Erro ao buscar dados');
         const data = await response.json();

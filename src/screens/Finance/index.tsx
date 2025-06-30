@@ -40,7 +40,7 @@ export default function Finance() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch('http://192.168.100.150:3000/Finance/2')
+    fetch('http://192.168.100.45:3000/finance/2')
       .then(async (response) => {
         if (!response.ok) throw new Error('Erro ao buscar dados financeiros');
         const data = await response.json();
@@ -89,7 +89,7 @@ export default function Finance() {
                 <View style={{ flex: 1 }}>
                   <Text style={styles.boletoCardTitle}>{finance.name}</Text>
                   <Text style={styles.boletoInfo}>Aluno(a)</Text>
-                  <Text style={styles.boletoInfo}>Curso: -</Text>
+                  <Text style={styles.boletoInfo}>Curso: Sistemas de Informação</Text>
                   <Text style={styles.boletoValor}>R$ {(finance.value ?? 0).toFixed(2)}</Text>
                   <Text style={styles.boletoVencimento}>Vence em {finance.due_date ? new Date(finance.due_date).toLocaleDateString() : '-'}</Text>
                 </View>
